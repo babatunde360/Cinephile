@@ -15,9 +15,25 @@
         android:id="@+id/nav_movies"
         android:name="com.example.cinephile.ui.movies.MovieFragment"
         android:label="movie_fragment"
-        tools:layout="@layout/fragment_movie" />
+        tools:layout="@layout/fragment_movie">
+        <action
+            android:id="@+id/action_showDetail"
+            app:destination="@id/movieDetailFragment"/>
+
+    </fragment>
     <fragment
         android:id="@+id/nav_series"
         android:name="com.example.cinephile.ui.series.SeriesFragment"
         android:label="SeriesFragment" />
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.example.cinephile.ui.moviesdetail.MovieDetailFragment"
+        android:label="MovieDetailFragment">
+        <argument
+            android:name="selectedProperty"
+            app:argType="com.example.cinephile.network.ResultsItem"/>
+
+
+    </fragment>
+
 </navigation>
