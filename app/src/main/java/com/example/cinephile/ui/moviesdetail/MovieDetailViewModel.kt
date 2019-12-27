@@ -4,17 +4,17 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.cinephile.network.ResultsItem
+import com.example.cinephile.network.MovieResultsItem
 
-class MovieDetailViewModel(resultsItem: ResultsItem, app: Application) : AndroidViewModel(app) {
+class MovieDetailViewModel(movieResultsItem: MovieResultsItem, app: Application) : AndroidViewModel(app) {
 
-    private val _selectedProperty = MutableLiveData<ResultsItem>()
-    val selectedProperty: LiveData<ResultsItem>
+    private val _selectedProperty = MutableLiveData<MovieResultsItem>()
+    val selectedProperty: LiveData<MovieResultsItem>
         get() {
             return _selectedProperty
         }
 
     init {
-        _selectedProperty.value = resultsItem
+        _selectedProperty.value = movieResultsItem
     }
 }

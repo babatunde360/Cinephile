@@ -31,7 +31,7 @@
         android:label="MovieDetailFragment">
         <argument
             android:name="selectedProperty"
-            app:argType="com.example.cinephile.network.ResultsItem"/>
+            app:argType="com.example.cinephile.network.MovieResultsItem"/>
 
 
     </fragment>

@@ -14,5 +14,5 @@ data class PopularMovies(
 	val totalPages: Int? = null,
 
 	@Json(name="results")
-	val results: List<ResultsItem?>? = null
+	val results: List<MovieResultsItem?>? = null
 )

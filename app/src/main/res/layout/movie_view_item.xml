@@ -6,7 +6,7 @@
     type="com.example.cinephile.network.PopularMovies" />
     <variable
         name="resultItem"
-        type="com.example.cinephile.network.ResultsItem" />
+        type="com.example.cinephile.network.MovieResultsItem" />
     <variable
         name="viewmodel"
         type="com.example.cinephile.ui.movies.MovieViewModel" />

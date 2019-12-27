@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.cinephile.R
-import com.example.cinephile.network.ResultsItem
+import com.example.cinephile.network.MovieResultsItem
 
 
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<ResultsItem>?){
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<MovieResultsItem>?){
     val adapter = recyclerView.adapter as MovieAdapter
     adapter.submitList(data)
 }

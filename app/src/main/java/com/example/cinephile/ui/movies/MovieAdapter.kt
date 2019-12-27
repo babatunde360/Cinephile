@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cinephile.databinding.MovieViewItemBinding
-import com.example.cinephile.network.ResultsItem
+import com.example.cinephile.network.MovieResultsItem
 
-class MovieAdapter(val onClickListener: OnClickListener): ListAdapter<ResultsItem, MovieAdapter.MovieViewHolder>(DiffCallback){
+class MovieAdapter(val onClickListener: OnClickListener): ListAdapter<MovieResultsItem, MovieAdapter.MovieViewHolder>(DiffCallback){
 
 
     class MovieViewHolder(private var binding: MovieViewItemBinding):
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(movie: ResultsItem){
+        fun bind(movie: MovieResultsItem){
             binding.resultItem = movie
             binding.executePendingBindings()
         }
@@ -35,19 +35,19 @@ class MovieAdapter(val onClickListener: OnClickListener): ListAdapter<ResultsIte
     }
 
 
-    companion object DiffCallback : DiffUtil.ItemCallback<ResultsItem>(){
-        override fun areItemsTheSame(oldItem: ResultsItem, newItem: ResultsItem): Boolean {
-            return oldItem === newItem
+    companion object DiffCallback : DiffUtil.ItemCallback<MovieResultsItem>(){
+        override fun areItemsTheSame(oldItemMovie: MovieResultsItem, newItemMovie: MovieResultsItem): Boolean {
+            return oldItemMovie === newItemMovie
         }
 
-        override fun areContentsTheSame(oldItem: ResultsItem, newItem: ResultsItem): Boolean {
-            return oldItem.id == newItem.id
+        override fun areContentsTheSame(oldItemMovie: MovieResultsItem, newItemMovie: MovieResultsItem): Boolean {
+            return oldItemMovie.id == newItemMovie.id
         }
 
     }
 
-    class OnClickListener(val clickListener: (item: ResultsItem) -> Unit){
-        fun onClick(item: ResultsItem) = clickListener(item)
+    class OnClickListener(val clickListener: (itemMovie: MovieResultsItem) -> Unit){
+        fun onClick(itemMovie: MovieResultsItem) = clickListener(itemMovie)
     }
 
 }

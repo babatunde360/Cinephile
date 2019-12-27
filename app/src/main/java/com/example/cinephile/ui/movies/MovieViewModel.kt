@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.cinephile.network.MovieApi
-import com.example.cinephile.network.ResultsItem
+import com.example.cinephile.network.MovieResultsItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -16,12 +16,12 @@ class MovieViewModel : ViewModel() {
     private val viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    private val _movieList = MutableLiveData<List<ResultsItem>>()
-    val movieList: LiveData<List<ResultsItem>>
+    private val _movieList = MutableLiveData<List<MovieResultsItem>>()
+    val movieList: LiveData<List<MovieResultsItem>>
     get() = _movieList
 
-    private val _navigateToSelectedProperty = MutableLiveData<ResultsItem>()
-    val navigateToSelectedProperty : LiveData<ResultsItem>
+    private val _navigateToSelectedProperty = MutableLiveData<MovieResultsItem>()
+    val navigateToSelectedProperty : LiveData<MovieResultsItem>
     get() = _navigateToSelectedProperty
 
 
@@ -33,7 +33,7 @@ class MovieViewModel : ViewModel() {
                 val getMovieDeffered = MovieApi.retrofitService.getLatestMovies()
             try{
                 val movieListResult = getMovieDeffered.await()
-                _movieList.value = movieListResult.results as List<ResultsItem>?
+                _movieList.value = movieListResult.results as List<MovieResultsItem>?
 
             }catch (e: Exception){
                Timber.d(e)
@@ -46,8 +46,8 @@ class MovieViewModel : ViewModel() {
         viewModelJob.cancel()
     }
 
-    fun displayPropertyDetails(item: ResultsItem){
-        _navigateToSelectedProperty.value = item
+    fun displayPropertyDetails(itemMovie: MovieResultsItem){
+        _navigateToSelectedProperty.value = itemMovie
     }
     fun displayPropertyDetailsComplete(){
         _navigateToSelectedProperty.value = null

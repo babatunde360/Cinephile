@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class ResultsItem(
+data class MovieResultsItem(
 
 	@Json(name="popularity")
 	val popularity: String? = null,
