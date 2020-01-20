@@ -9,4 +9,7 @@ interface MovieApiInterface {
     @GET("movie/popular?api_key=${api_key}")
     fun getLatestMovies():
             Deferred<PopularMovies>
+    @GET("tv/top_rated?api_key=${api_key}")
+    fun getLatestSeries():
+            Deferred<Series>
 }

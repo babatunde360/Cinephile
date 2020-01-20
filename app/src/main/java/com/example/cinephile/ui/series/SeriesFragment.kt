@@ -6,18 +6,30 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.example.cinephile.R
+import androidx.recyclerview.widget.GridLayoutManager
+import com.example.cinephile.databinding.FragmentSeriesBinding
 
 class SeriesFragment : Fragment(){
-    private lateinit var seriesViewModel: SeriesViewModel
+
+    private val seriesViewModel by lazy {
+        ViewModelProviders.of(this).get(SeriesViewModel::class.java)
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        seriesViewModel = ViewModelProviders.of(this).get(SeriesViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_series,container,false)
+        val binding = FragmentSeriesBinding.inflate(inflater)
+        binding.lifecycleOwner = this
 
-        return root
+        binding.viewmodel = seriesViewModel
+        binding.seriesList.adapter = SeriesAdapter()
+
+
+        val layoutManager = GridLayoutManager(activity,2)
+        binding.seriesList.layoutManager = layoutManager
+
+
+        return binding.root
     }
 }
