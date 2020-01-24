@@ -8,8 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.cinephile.databinding.MovieDetailFragmentBinding
 import com.example.cinephile.ui.movies.MovieDetailViewModelFactory
+import com.google.android.material.tabs.TabLayoutMediator
 
 class MovieDetailFragment : Fragment() {
+    private lateinit var binding: MovieDetailFragmentBinding
+    private lateinit var viewPagerAdapter: ViewPagerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -17,11 +20,18 @@ class MovieDetailFragment : Fragment() {
 
 
         val application = requireNotNull(activity).application
-        val binding = MovieDetailFragmentBinding.inflate(inflater)
+        binding = MovieDetailFragmentBinding.inflate(inflater)
         binding.lifecycleOwner = this
+        viewPagerAdapter = ViewPagerAdapter(this)
 
-        val ResultsItem = MovieDetailFragmentArgs.fromBundle(arguments!!).selectedProperty
-        val viewModelFactory = MovieDetailViewModelFactory(ResultsItem,application)
+        binding.viewPager.adapter = viewPagerAdapter
+
+
+        val resultsItem = MovieDetailFragmentArgs.fromBundle(arguments!!).selectedProperty
+        val viewModelFactory = MovieDetailViewModelFactory(resultsItem,application)
+
+        resultsItem.id
+
 
         binding.movieDetailViewModel = ViewModelProviders.of(
             this,viewModelFactory).get(MovieDetailViewModel::class.java)
@@ -29,4 +39,21 @@ class MovieDetailFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val tabLayout = binding.tabs
+        TabLayoutMediator(tabLayout, binding.viewPager){tab, position ->
+            when(position){
+                0 ->{
+                    tab.text = "Cast"
+                }
+                1 ->{
+                    tab.text = "Screening"
+                }
+                2 ->{
+                    tab.text = "episodes"
+                }
+            }
+        }.attach()
+
+    }
 }

@@ -8,59 +8,87 @@
             type="com.example.cinephile.ui.moviesdetail.MovieDetailViewModel" />
     </data>
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardCornerRadius="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="4dp"
-        android:layout_marginTop="4dp"
-        app:cardElevation="4dp">
+        android:fitsSystemWindows="true">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/movieDetailAppBar"
+            android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+            android:fitsSystemWindows="true">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                app:contentScrim="?attr/colorPrimary"
+                app:expandedTitleMarginStart="48dp"
+                app:expandedTitleMarginEnd="64dp"
+                android:fitsSystemWindows="true">
+
+                <ImageView
+                    android:id="@+id/movieImage"
+                    movieImage="@{movieDetailViewModel.selectedProperty.posterPath}"
+                    android:layout_width="match_parent"
+                    android:layout_height="307dp"
+                    android:layout_marginTop="68dp"
+                    android:contentDescription="@string/movie_image_poster"
+                    app:layout_collapseMode="parallax"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabs"
+                    android:layout_gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fitsSystemWindows="true"
+                    app:layout_collapseMode="pin"
+                    >
+
+                </com.google.android.material.tabs.TabLayout>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:clipToPadding="false"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <ImageView
-                android:contentDescription="@string/movie_image_poster"
-                android:id="@+id/movieImage"
-                movieImage="@{movieDetailViewModel.selectedProperty.posterPath}"
-                android:layout_width="326dp"
-                android:layout_height="307dp"
-                android:layout_marginTop="68dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/movieTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@{movieDetailViewModel.selectedProperty.title}"
-                android:textColor="#E80A0A0A"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/movieImage"
-                android:textSize="24sp"/>
 
-            <TextView
-                android:id="@+id/movieBody"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="16dp"
-                android:paddingEnd="8dp"
-                android:layout_marginEnd="4dp"
-                android:text="@{movieDetailViewModel.selectedProperty.overview}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/movieTitle"
-                android:textSize="16sp"/>
+                <androidx.viewpager2.widget.ViewPager2
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/viewPager"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
+
+                <!--
+                            <TextView
+                                android:id="@+id/movieBody"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="4dp"
+                                android:paddingStart="16dp"
+                                android:paddingEnd="8dp"
+                                android:text="@{movieDetailViewModel.selectedProperty.overview}"
+                                android:textSize="16sp"
+                                 />-->
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
