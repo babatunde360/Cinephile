@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.GridLayoutManager
 import com.example.cinephile.databinding.FragmentSeriesBinding
+import com.google.android.material.tabs.TabLayoutMediator
 
 class SeriesFragment : Fragment(){
+
+    lateinit var binding: FragmentSeriesBinding
 
     private val seriesViewModel by lazy {
         ViewModelProviders.of(this).get(SeriesViewModel::class.java)
@@ -19,17 +21,37 @@ class SeriesFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentSeriesBinding.inflate(inflater)
+         binding = FragmentSeriesBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
         binding.viewmodel = seriesViewModel
-        binding.seriesList.adapter = SeriesAdapter()
+
+        binding.seriesViewPager.adapter = SeriesViewPagerAdapter(this)
+        //binding.seriesList.adapter = SeriesAdapter()
 
 
-        val layoutManager = GridLayoutManager(activity,2)
-        binding.seriesList.layoutManager = layoutManager
+       // val layoutManager = GridLayoutManager(activity,2)
+        //binding.seriesList.layoutManager = layoutManager
 
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        val seriesTab = binding.seriesTab
+        val seriesViewPager = binding.seriesViewPager
+        TabLayoutMediator(seriesTab,seriesViewPager){ tab, position ->
+            when(position){
+                0 ->{
+                    tab.text = "Airing Today"
+                }else ->{
+                tab.text = position.toString()
+            }
+
+            }
+
+        }.attach()
+
     }
 }

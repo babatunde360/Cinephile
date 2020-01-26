@@ -5,37 +5,36 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cinephile.databinding.SeriesViewItemBinding
+import com.example.cinephile.databinding.SeriesAiringTodayItemViewBinding
 import com.example.cinephile.network.SeriesResultsItem
 
-class SeriesAdapter: ListAdapter<SeriesResultsItem, SeriesAdapter.SeriesViewHolder>(DiffCallback) {
+class AiringTodayAdapter : ListAdapter<SeriesResultsItem, AiringTodayAdapter.AiringTodayViewHolder>(DiffCallback){
 
-
-    class SeriesViewHolder(private var binding: SeriesViewItemBinding):
-        RecyclerView.ViewHolder(binding.root){
-        fun bind(series: SeriesResultsItem){
-            binding.seriesResultItem = series
-            binding.executePendingBindings()
-        }
+    class AiringTodayViewHolder(private val binding: SeriesAiringTodayItemViewBinding):
+            RecyclerView.ViewHolder(binding.root){
+            fun bind(series: SeriesResultsItem){
+                binding.currentSeries = series
+                binding.executePendingBindings()
+            }
     }
 
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SeriesViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AiringTodayViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = SeriesViewItemBinding.inflate(layoutInflater)
-        return SeriesViewHolder(binding)
+        val binding = SeriesAiringTodayItemViewBinding.inflate(layoutInflater)
+        return AiringTodayViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: SeriesViewHolder, position: Int) {
-       val currentSeries = getItem(position)
+    override fun onBindViewHolder(holder: AiringTodayViewHolder, position: Int) {
+        val currentSeries = getItem(position)
         holder.bind(currentSeries)
-
     }
+
     companion object DiffCallback: DiffUtil.ItemCallback<SeriesResultsItem>() {
         override fun areItemsTheSame(
             oldItem: SeriesResultsItem,
             newItem: SeriesResultsItem
         ): Boolean {
+
             return oldItem === newItem
         }
 
@@ -47,4 +46,5 @@ class SeriesAdapter: ListAdapter<SeriesResultsItem, SeriesAdapter.SeriesViewHold
         }
 
     }
+
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+<variable
+    name="SeriesViewModel"
+    type="com.example.cinephile.ui.series.SeriesViewModel" />
+        <variable
+            name="AringToday"
+            type="com.example.cinephile.network.AiringToday" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/airingTodayRecyclerView"
+        seriesListData="@{SeriesViewModel.airingTodayList}"/>
+
+    <!--TODO fix this to load more data when you click load next-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:id="@+id/loadMore"
+        android:text="@string/load_next"
+        android:layout_weight="0"
+        android:layout_gravity="center_horizontal"
+        />
+</LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

@@ -19,19 +19,36 @@ class SeriesViewModel: ViewModel(){
     val seriesList: LiveData<List<SeriesResultsItem>>
         get() = _seriesList
 
+    private val _airingTodayList = MutableLiveData<List<SeriesResultsItem>>()
+    val airingTodayList : LiveData<List<SeriesResultsItem>>
+    get() = _airingTodayList
+
     init {
         getLatestSeries()
+        getAiringToday()
     }
 
     private fun getLatestSeries() {
         coroutineScope.launch {
-            val getDefferedSeries = MovieApi.retrofitService.getLatestSeries()
+            val getDeferredSeries = MovieApi.retrofitService.getLatestSeries()
             try{
-                val seriesListResult = getDefferedSeries.await()
+                val seriesListResult = getDeferredSeries.await()
                 _seriesList.value = seriesListResult.results as List<SeriesResultsItem>?
 
 
             }catch (e:Exception){
+                Timber.d(e)
+            }
+        }
+    }
+
+    private fun getAiringToday(){
+        coroutineScope.launch {
+            val getAiringTodayDeferred = MovieApi.retrofitService.getMovieAiringToday()
+            try{
+                val airingTodayResult = getAiringTodayDeferred.await()
+                _airingTodayList.value = airingTodayResult.results as List<SeriesResultsItem>?
+            }catch (e: Exception){
                 Timber.d(e)
             }
         }
