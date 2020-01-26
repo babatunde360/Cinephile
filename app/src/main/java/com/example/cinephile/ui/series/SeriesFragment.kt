@@ -45,7 +45,11 @@ class SeriesFragment : Fragment(){
             when(position){
                 0 ->{
                     tab.text = "Airing Today"
-                }else ->{
+                }
+                1->{
+                    tab.text = "Top Rated"
+                }
+                else ->{
                 tab.text = position.toString()
             }
 

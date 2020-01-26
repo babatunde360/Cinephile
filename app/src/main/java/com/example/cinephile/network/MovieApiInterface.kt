@@ -22,4 +22,8 @@ interface MovieApiInterface {
     @GET("tv/airing_today?api_key=${api_key}&language=en-US")
     fun getMovieAiringToday():
             Deferred<AiringToday>
+
+    @GET("tv/top_rated?api_key=${api_key}&language=en-US")
+    fun getTopRatedSeries():
+            Deferred<TopRated>
 }
