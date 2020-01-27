@@ -14,8 +14,10 @@ class SeriesViewPagerAdapter (fragment: Fragment)
             0 ->{
                 AiringTodayFragment()
             }
-            else -> {
+            1 -> {
                 TopRatedFragment()
+            }else ->{
+                PopularSeriesFragment()
             }
         }
     }

@@ -23,7 +23,7 @@ class AiringTodayFragment : Fragment() {
 
         binding.seriesViewModel = seriesViewModel
 
-        binding.airingTodayRecyclerView.adapter = AiringTodayAdapter()
+        binding.airingTodayRecyclerView.adapter = SeriesAdapter()
         binding.airingTodayRecyclerView.layoutManager = GridLayoutManager(activity,2)
 
 

@@ -27,11 +27,7 @@ class SeriesFragment : Fragment(){
         binding.viewmodel = seriesViewModel
 
         binding.seriesViewPager.adapter = SeriesViewPagerAdapter(this)
-        //binding.seriesList.adapter = SeriesAdapter()
 
-
-       // val layoutManager = GridLayoutManager(activity,2)
-        //binding.seriesList.layoutManager = layoutManager
 
 
         return binding.root
@@ -50,7 +46,7 @@ class SeriesFragment : Fragment(){
                     tab.text = "Top Rated"
                 }
                 else ->{
-                tab.text = position.toString()
+                tab.text = "Popular"
             }
 
             }

@@ -14,7 +14,7 @@ class SeriesAdapter: ListAdapter<SeriesResultsItem, SeriesAdapter.SeriesViewHold
     class SeriesViewHolder(private var binding: SeriesViewItemBinding):
         RecyclerView.ViewHolder(binding.root){
         fun bind(series: SeriesResultsItem){
-            binding.seriesResultItem = series
+            binding.currentSeries = series
             binding.executePendingBindings()
         }
     }

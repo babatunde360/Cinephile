@@ -17,4 +17,7 @@
     <string name="menu_series">Series</string>
     <string name="movie_image_poster">movie image poster</string>
     <string name="load_next">Load Next</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

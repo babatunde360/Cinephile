@@ -19,6 +19,10 @@ class SeriesViewModel: ViewModel(){
     val topRatedList: LiveData<List<SeriesResultsItem>>
         get() = _topRatedList
 
+    private val _popularSeriesList = MutableLiveData<List<SeriesResultsItem>>()
+    val popularSeriesList: LiveData<List<SeriesResultsItem>>
+    get() = _popularSeriesList
+
     private val _airingTodayList = MutableLiveData<List<SeriesResultsItem>>()
     val airingTodayList : LiveData<List<SeriesResultsItem>>
     get() = _airingTodayList
@@ -26,6 +30,19 @@ class SeriesViewModel: ViewModel(){
     init {
         getTopRatedSeries()
         getAiringToday()
+        getPopularSeries()
+    }
+
+    private fun getPopularSeries() {
+        coroutineScope.launch {
+            val getPopularSeriesDeferred = MovieApi.retrofitService.getPopularSeries()
+            try {
+                val popularSeriesResult = getPopularSeriesDeferred.await()
+                _popularSeriesList.value = popularSeriesResult.results as List<SeriesResultsItem>?
+            }catch (e: Exception){
+                Timber.d(e)
+            }
+        }
     }
 
     private fun getTopRatedSeries() {

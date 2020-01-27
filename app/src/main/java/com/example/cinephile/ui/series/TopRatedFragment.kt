@@ -20,7 +20,7 @@ class TopRatedFragment : Fragment() {
         val viewModel = ViewModelProviders.of(this).get(SeriesViewModel::class.java)
         binding.lifecycleOwner = this
 
-        binding.topRatedRecyclerView.adapter = AiringTodayAdapter()
+        binding.topRatedRecyclerView.adapter = SeriesAdapter()
         binding.topRatedRecyclerView.layoutManager = GridLayoutManager(activity,2)
 
         binding.viewModel = viewModel

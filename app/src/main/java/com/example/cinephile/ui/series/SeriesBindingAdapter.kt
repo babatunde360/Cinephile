@@ -11,9 +11,10 @@ import com.example.cinephile.network.SeriesResultsItem
 
 @BindingAdapter("seriesListData")
 fun bindSeriesRecyclerView(recyclerView: RecyclerView, data: List<SeriesResultsItem>?){
-    val adapter = recyclerView.adapter as AiringTodayAdapter
+    val adapter = recyclerView.adapter as SeriesAdapter
     adapter.submitList(data)
 }
+
 
 @BindingAdapter("seriesTitle")
 fun bindTitle(textView: TextView, title: String?){
