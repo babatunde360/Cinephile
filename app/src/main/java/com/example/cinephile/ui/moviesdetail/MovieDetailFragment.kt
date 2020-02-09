@@ -30,8 +30,6 @@ class MovieDetailFragment : Fragment() {
         val resultsItem = MovieDetailFragmentArgs.fromBundle(arguments!!).selectedProperty
         val viewModelFactory = MovieDetailViewModelFactory(resultsItem,application)
 
-        resultsItem.id
-
 
         binding.movieDetailViewModel = ViewModelProviders.of(
             this,viewModelFactory).get(MovieDetailViewModel::class.java)

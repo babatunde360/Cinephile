@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cinephile.databinding.SeriesViewItemBinding
 import com.example.cinephile.network.SeriesResultsItem
 
-class SeriesAdapter: ListAdapter<SeriesResultsItem, SeriesAdapter.SeriesViewHolder>(DiffCallback) {
+class SeriesAdapter(val onClickListener: SeriesAdapter.OnClickListener)
+    : ListAdapter<SeriesResultsItem, SeriesAdapter.SeriesViewHolder>(DiffCallback) {
 
 
     class SeriesViewHolder(private var binding: SeriesViewItemBinding):
@@ -29,6 +30,9 @@ class SeriesAdapter: ListAdapter<SeriesResultsItem, SeriesAdapter.SeriesViewHold
     override fun onBindViewHolder(holder: SeriesViewHolder, position: Int) {
        val currentSeries = getItem(position)
         holder.bind(currentSeries)
+        holder.itemView.setOnClickListener{
+            onClickListener.clickListener(currentSeries)
+        }
 
     }
     companion object DiffCallback: DiffUtil.ItemCallback<SeriesResultsItem>() {
@@ -46,5 +50,8 @@ class SeriesAdapter: ListAdapter<SeriesResultsItem, SeriesAdapter.SeriesViewHold
             return oldItem.id == newItem.id
         }
 
+    }
+    class OnClickListener(val clickListener: (itemSeries: SeriesResultsItem) -> Unit){
+        fun onClick(itemSeries: SeriesResultsItem) = clickListener(itemSeries)
     }
 }

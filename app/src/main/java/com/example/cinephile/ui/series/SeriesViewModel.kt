@@ -27,6 +27,10 @@ class SeriesViewModel: ViewModel(){
     val airingTodayList : LiveData<List<SeriesResultsItem>>
     get() = _airingTodayList
 
+    private val _navigateToSelectedProperty = MutableLiveData<SeriesResultsItem>()
+    val navigateToSelectedProperty : LiveData<SeriesResultsItem>
+        get() = _navigateToSelectedProperty
+
     init {
         getTopRatedSeries()
         getAiringToday()
@@ -69,6 +73,14 @@ class SeriesViewModel: ViewModel(){
                 Timber.d(e)
             }
         }
+    }
+
+
+    fun displayPropertyDetails(itemSeries: SeriesResultsItem){
+        _navigateToSelectedProperty.value = itemSeries
+    }
+    fun displayPropertyDetailsComplete(){
+        _navigateToSelectedProperty.value = null
     }
 
     override fun onCleared() {

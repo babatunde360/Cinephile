@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.cinephile.databinding.FragmentAiringTodayBinding
 
@@ -23,7 +25,15 @@ class AiringTodayFragment : Fragment() {
 
         binding.seriesViewModel = seriesViewModel
 
-        binding.airingTodayRecyclerView.adapter = SeriesAdapter()
+        binding.airingTodayRecyclerView.adapter = SeriesAdapter(SeriesAdapter.OnClickListener{
+            seriesViewModel.displayPropertyDetails(it)
+        })
+        seriesViewModel.navigateToSelectedProperty.observe(this, Observer {
+            if(it != null){
+                this.findNavController().navigate(SeriesFragmentDirections.actionNavSeriesToSeriesDetailFragment(it))
+                seriesViewModel.displayPropertyDetailsComplete()
+            }
+        })
         binding.airingTodayRecyclerView.layoutManager = GridLayoutManager(activity,2)
 
 

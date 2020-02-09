@@ -4,8 +4,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
-            name="movieDetailViewModel"
-            type="com.example.cinephile.ui.moviesdetail.MovieDetailViewModel" />
+            name="seriesDetailViewModel"
+            type="com.example.cinephile.ui.seriesdetail.SeriesDetailViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -31,7 +31,7 @@
 
                 <ImageView
                     android:id="@+id/movieImage"
-                    movieImage="@{movieDetailViewModel.selectedProperty.posterPath}"
+
                     android:layout_width="match_parent"
                     android:layout_height="307dp"
                     android:layout_marginTop="68dp"
