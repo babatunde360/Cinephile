@@ -20,6 +20,10 @@ class MovieViewModel : ViewModel() {
     val movieList: LiveData<List<MovieResultsItem>>
     get() = _movieList
 
+    private val _upComingMovieLists = MutableLiveData<List<MovieResultsItem>>()
+    val UpComingMoviesList: LiveData<List<MovieResultsItem>>
+    get() = _upComingMovieLists
+
     private val _navigateToSelectedProperty = MutableLiveData<MovieResultsItem>()
     val navigateToSelectedProperty : LiveData<MovieResultsItem>
     get() = _navigateToSelectedProperty
@@ -27,7 +31,21 @@ class MovieViewModel : ViewModel() {
 
     init {
         getLatestMovies()
+        getUpComingMovies()
     }
+
+    private fun getUpComingMovies() {
+        coroutineScope.launch {
+            val getDeferredUpComingMovies = MovieApi.retrofitService.getUpComingMovies()
+            try {
+                val upComingMoviesResult = getDeferredUpComingMovies.await()
+                _upComingMovieLists.value = upComingMoviesResult.results as List<MovieResultsItem>?
+            }catch (e: Exception){
+                Timber.d(e)
+            }
+        }
+    }
+
     private fun getLatestMovies(){
         coroutineScope.launch {
                 val getMovieDeffered = MovieApi.retrofitService.getLatestMovies()

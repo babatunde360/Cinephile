@@ -31,4 +31,8 @@ interface MovieApiInterface {
     @GET("tv/popular?api_key=${api_key}&language=en-US")
     fun getPopularSeries():
             Deferred<PopularSeries>
+
+    @GET("movie/upcoming?api_key=${api_key}&language=en-US&region=us")
+    fun getUpComingMovies():
+            Deferred<UpcomingMovies>
 }
