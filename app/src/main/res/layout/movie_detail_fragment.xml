@@ -31,7 +31,7 @@
 
                 <ImageView
                     android:id="@+id/movieImage"
-                    movieImage="@{movieDetailViewModel.selectedProperty.posterPath}"
+                    movieImage="@{movieDetailViewModel.selectedProperty.backdropPath}"
                     android:layout_width="match_parent"
                     android:layout_height="307dp"
                     android:layout_marginTop="68dp"
