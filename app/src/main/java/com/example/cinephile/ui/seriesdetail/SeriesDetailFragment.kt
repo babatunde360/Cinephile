@@ -7,29 +7,54 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.cinephile.databinding.SeriesDetailFragmentBinding
+import com.example.cinephile.ui.series.SeriesDetailViewModelFactory
+import com.google.android.material.tabs.TabLayoutMediator
 
 class SeriesDetailFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = SeriesDetailFragment()
-    }
-
     private lateinit var viewModel: SeriesDetailViewModel
+    private lateinit var binding: SeriesDetailFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = SeriesDetailFragmentBinding.inflate(inflater)
+        val application = requireNotNull(activity).application
+        binding = SeriesDetailFragmentBinding.inflate(inflater)
+        binding.lifecycleOwner = this
+
+        val seriesResultItem = arguments?.
+            let { SeriesDetailFragmentArgs.fromBundle(it).selectedSeries }
+
+        val viewModelFactory = seriesResultItem?.
+            let { SeriesDetailViewModelFactory(it,application) }
+
+        viewModel = ViewModelProviders.of(this,viewModelFactory).get(SeriesDetailViewModel::class.java)
+        binding.seriesDetailviewPager.adapter = SeriesDetailViewPagerAdapter(this)
+
+        binding.seriesDetailViewModel = viewModel
 
 
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(SeriesDetailViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val seriesDetailTabs = binding.seriesDetailTabs
+        val seriesDetailViewPager = binding.seriesDetailviewPager
+
+
+
+        TabLayoutMediator(seriesDetailTabs,seriesDetailViewPager){tab, position ->
+            when(position){
+                0->{
+                    tab.text = "Cast"
+                }else->{
+                tab.text = "Nothing"
+            }
+            }
+
+        }.attach()
     }
+
 
 }

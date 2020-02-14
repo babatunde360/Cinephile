@@ -18,7 +18,11 @@ interface MovieApiInterface {
 
     @GET("movie/{movieId}/credits?api_key=${api_key}")
     fun getMovieCast(@Path("movieId") movieId: Int?):
-            Deferred<Movie>
+            Deferred<MovieCredits>
+
+    @GET("tv/{seriesId}/credits?api_key=${api_key}&language=en-US")
+    fun getSeriesCast(@Path("seriesId") seriesId: Int?):
+            Deferred<SeriesCredits>
 
     @GET("tv/airing_today?api_key=${api_key}&language=en-US")
     fun getMovieAiringToday():
@@ -35,4 +39,5 @@ interface MovieApiInterface {
     @GET("movie/upcoming?api_key=${api_key}&language=en-US&region=us")
     fun getUpComingMovies():
             Deferred<UpcomingMovies>
+
 }

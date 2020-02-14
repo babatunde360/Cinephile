@@ -34,11 +34,11 @@ class MovieDetailViewModel(movieResultsItem: MovieResultsItem, app: Application)
     val movieResultItemId: Int? = movieResultsItem.id
     init {
         _selectedProperty.value = movieResultsItem
-        movieResultItemId?.let { getLatestMovies(it) }
+        movieResultItemId?.let { getMovieCast(it) }
 
     }
 
-    private fun getLatestMovies(movieResultItemId: Int){
+    private fun getMovieCast(movieResultItemId: Int){
         coroutineScope.launch {
             val getCastDeferred = MovieApi.retrofitService.getMovieCast(movieResultItemId)
             try{
