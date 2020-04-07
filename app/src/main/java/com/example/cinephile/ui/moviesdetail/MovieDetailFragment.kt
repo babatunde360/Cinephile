@@ -6,9 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.example.cinephile.databinding.MovieDetailFragmentBinding
 import com.example.cinephile.ui.movies.MovieDetailViewModelFactory
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.android.synthetic.main.movie_detail_fragment.*
 
 class MovieDetailFragment : Fragment() {
     private lateinit var binding: MovieDetailFragmentBinding
@@ -38,6 +41,7 @@ class MovieDetailFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+       NavigationUI.setupWithNavController(movie_detail_toolbar,findNavController())
         val tabLayout = binding.tabs
         TabLayoutMediator(tabLayout, binding.viewPager){tab, position ->
             when(position){

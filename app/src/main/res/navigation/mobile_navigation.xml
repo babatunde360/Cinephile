@@ -31,20 +31,18 @@
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
-        android:name="com.example.cinephile.ui.moviesdetail.MovieDetailFragment"
-        android:label="MovieDetailFragment">
+        android:name="com.example.cinephile.ui.moviesdetail.MovieDetailFragment">
         <argument
             android:name="selectedProperty"
-            app:argType="com.example.cinephile.network.MovieResultsItem"/>
+            app:argType="com.example.cinephile.network.MovieResultsItem" />
 
 
     </fragment>
     <fragment
         android:id="@+id/seriesDetailFragment"
-        android:name="com.example.cinephile.ui.seriesdetail.SeriesDetailFragment"
-        android:label="SeriesDetailFragment">
+        android:name="com.example.cinephile.ui.seriesdetail.SeriesDetailFragment">
         <argument
             android:name="selectedSeries"
-            app:argType="com.example.cinephile.network.SeriesResultsItem"/>
+            app:argType="com.example.cinephile.network.SeriesResultsItem" />
     </fragment>
 </navigation>
