@@ -5,10 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.cinephile.network.MovieApi
 import com.example.cinephile.network.MovieResultsItem
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import timber.log.Timber
 
 class MovieViewModel : ViewModel() {
@@ -35,7 +32,7 @@ class MovieViewModel : ViewModel() {
     }
 
     private fun getUpComingMovies() {
-        coroutineScope.launch {
+        GlobalScope.launch(Dispatchers.Main){
             val getDeferredUpComingMovies = MovieApi.retrofitService.getUpComingMovies()
             try {
                 val upComingMoviesResult = getDeferredUpComingMovies.await()
@@ -47,7 +44,7 @@ class MovieViewModel : ViewModel() {
     }
 
     private fun getLatestMovies(){
-        coroutineScope.launch {
+        GlobalScope.launch(Dispatchers.Main){
                 val getMovieDeffered = MovieApi.retrofitService.getLatestMovies()
             try{
                 val movieListResult = getMovieDeffered.await()

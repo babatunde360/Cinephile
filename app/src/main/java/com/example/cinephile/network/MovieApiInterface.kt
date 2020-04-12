@@ -20,6 +20,14 @@ interface MovieApiInterface {
     fun getMovieCast(@Path("movieId") movieId: Int?):
             Deferred<MovieCredits>
 
+    @GET("movie/upcoming?api_key=${api_key}&language=en-US&region=us")
+    fun getUpComingMovies():
+            Deferred<UpcomingMovies>
+
+    @GET("/3/tv/{seriesId}?api_key=${api_key}&language=en-US")
+    fun getSeriesDetails(@Path("seriesId") seriesId: Int?):
+            Deferred<SeriesDetails>
+
     @GET("tv/{seriesId}/credits?api_key=${api_key}&language=en-US")
     fun getSeriesCast(@Path("seriesId") seriesId: Int?):
             Deferred<SeriesCredits>
@@ -36,8 +44,5 @@ interface MovieApiInterface {
     fun getPopularSeries():
             Deferred<PopularSeries>
 
-    @GET("movie/upcoming?api_key=${api_key}&language=en-US&region=us")
-    fun getUpComingMovies():
-            Deferred<UpcomingMovies>
 
 }

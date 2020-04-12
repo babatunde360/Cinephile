@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.example.cinephile.databinding.FragmentMovieBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -14,7 +14,7 @@ class MovieFragment : Fragment() {
     lateinit var binding: FragmentMovieBinding
 
     private val viewModel: MovieViewModel by lazy {
-        ViewModelProviders.of(this).get(MovieViewModel::class.java)
+        ViewModelProvider(this).get(MovieViewModel::class.java)
     }
 
 

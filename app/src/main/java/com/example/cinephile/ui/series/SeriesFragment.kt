@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.example.cinephile.databinding.FragmentSeriesBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -14,7 +14,7 @@ class SeriesFragment : Fragment(){
     lateinit var binding: FragmentSeriesBinding
 
     private val seriesViewModel by lazy {
-        ViewModelProviders.of(this).get(SeriesViewModel::class.java)
+        ViewModelProvider(this).get(SeriesViewModel::class.java)
     }
     override fun onCreateView(
         inflater: LayoutInflater,

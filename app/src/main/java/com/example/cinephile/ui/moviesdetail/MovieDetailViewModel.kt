@@ -39,7 +39,7 @@ class MovieDetailViewModel(movieResultsItem: MovieResultsItem, app: Application)
     }
 
     private fun getMovieCast(movieResultItemId: Int){
-        coroutineScope.launch {
+        coroutineScope.launch(Dispatchers.IO){
             val getCastDeferred = MovieApi.retrofitService.getMovieCast(movieResultItemId)
             try{
                 val movieListResult = getCastDeferred.await()

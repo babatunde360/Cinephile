@@ -8,6 +8,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.cinephile.R
 import com.example.cinephile.network.SeriesResultsItem
+import com.example.cinephile.network.SeriesSeasons
+import com.example.cinephile.ui.seriesdetail.SeriesSeasonAdapter
 
 @BindingAdapter("seriesListData")
 fun bindSeriesRecyclerView(recyclerView: RecyclerView, data: List<SeriesResultsItem>?){
@@ -15,6 +17,11 @@ fun bindSeriesRecyclerView(recyclerView: RecyclerView, data: List<SeriesResultsI
     adapter.submitList(data)
 }
 
+@BindingAdapter("seriesSeason")
+fun bindSeasonRecyclerView(rv:RecyclerView, data: List<SeriesSeasons>?){
+    val adapter = rv.adapter as SeriesSeasonAdapter
+    adapter.submitList(data)
+}
 
 @BindingAdapter("seriesTitle")
 fun bindTitle(textView: TextView, title: String?){

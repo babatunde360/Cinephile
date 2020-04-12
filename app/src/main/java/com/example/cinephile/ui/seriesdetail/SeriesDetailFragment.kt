@@ -52,7 +52,7 @@ class SeriesDetailFragment : Fragment() {
                 0->{
                     tab.text = "Cast"
                 }else->{
-                tab.text = "Nothing"
+                tab.text = "Seasons"
             }
             }
 

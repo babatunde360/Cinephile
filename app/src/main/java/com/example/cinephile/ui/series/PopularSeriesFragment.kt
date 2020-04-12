@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.cinephile.databinding.FragmentPopularSeriesBinding
@@ -24,13 +24,13 @@ class PopularSeriesFragment : Fragment() {
         val binding = FragmentPopularSeriesBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
-        val viewModel = ViewModelProviders.of(this).get(SeriesViewModel::class.java)
+        val viewModel = ViewModelProvider(this).get(SeriesViewModel::class.java)
         binding.viewModel = viewModel
 
         binding.popularSeriesRecyclerView.adapter = SeriesAdapter(SeriesAdapter.OnClickListener{
             viewModel.displayPropertyDetails(it)
         })
-        viewModel.navigateToSelectedProperty.observe(this, Observer {
+        viewModel.navigateToSelectedProperty.observe(viewLifecycleOwner, Observer {
             if (it!=null){
                 this.findNavController().navigate(SeriesFragmentDirections.actionNavSeriesToSeriesDetailFragment(it))
                 viewModel.displayPropertyDetailsComplete()

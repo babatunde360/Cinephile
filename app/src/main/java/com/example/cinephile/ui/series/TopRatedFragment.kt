@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.cinephile.databinding.FragmentTopRatedBinding
@@ -19,7 +19,7 @@ class TopRatedFragment : Fragment() {
     ): View? {
        val binding = FragmentTopRatedBinding.inflate(inflater)
 
-        val viewModel = ViewModelProviders.of(this).get(SeriesViewModel::class.java)
+        val viewModel = ViewModelProvider(this).get(SeriesViewModel::class.java)
         binding.lifecycleOwner = this
 
 
@@ -27,7 +27,7 @@ class TopRatedFragment : Fragment() {
         binding.topRatedRecyclerView.adapter = SeriesAdapter(SeriesAdapter.OnClickListener{
             viewModel.displayPropertyDetails(it)
         })
-        viewModel.navigateToSelectedProperty.observe(this, Observer {
+        viewModel.navigateToSelectedProperty.observe(viewLifecycleOwner, Observer {
             if(it != null){
                 this.findNavController().navigate(SeriesFragmentDirections.actionNavSeriesToSeriesDetailFragment(it))
                 viewModel.displayPropertyDetailsComplete()

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.cinephile.ui.seriesdetail.SeriesDetailViewModel" />
+
+    </data>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.seriesdetail.SeriesSeasonFragment">
+
+<androidx.recyclerview.widget.RecyclerView
+    android:layout_width="match_parent"
+    app:seriesSeason="@{viewModel.seriesSeasons}"
+    android:layout_height="match_parent"
+    android:id="@+id/series_season_recycler_view"
+    tools:listitem="@layout/series_season_view_item"/>
+
+</LinearLayout>
+</layout>

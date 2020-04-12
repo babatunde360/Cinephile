@@ -4,9 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.cinephile.network.CastItem
-import com.example.cinephile.network.MovieApi
-import com.example.cinephile.network.SeriesResultsItem
+import com.example.cinephile.network.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -23,6 +21,10 @@ private val job = Job()
     val selectedProperty: LiveData<SeriesResultsItem>
         get() = _selectedProperty
 
+    private val _seriesSeasons = MutableLiveData<List<SeriesSeasons>>()
+    val seriesSeasons : LiveData<List<SeriesSeasons>>
+    get() = _seriesSeasons
+
     private val _seriesCastList = MutableLiveData<List<CastItem>>()
     val seriesCastList: LiveData<List<CastItem>>
         get() = _seriesCastList
@@ -32,16 +34,32 @@ private val job = Job()
     val seriesResultsItemId = seriesResultItem.id
     init {
         _selectedProperty.value = seriesResultItem
-        seriesResultsItemId?.let { getSeriesCast(it) }
+        seriesResultsItemId?.let {
+            getSeriesCast(it)
+            getSeriesDetails(it)
+        }
 
     }
     private fun getSeriesCast(seriesResultItemId: Int){
-        coroutineScope.launch {
+        coroutineScope.launch(Dispatchers.IO){
             val getSeriesCastDeferred = MovieApi.retrofitService.getSeriesCast(seriesResultItemId)
             try{
                 val seriesCastResult = getSeriesCastDeferred.await()
                 _seriesCastList.value = seriesCastResult.cast as List<CastItem>
             }catch (e: Exception){
+                Timber.d(e)
+            }
+        }
+    }
+
+    private fun getSeriesDetails(seriesResultItemId: Int){
+        coroutineScope.launch(Dispatchers.IO){
+            val getSeriesDetailsDeferred = MovieApi.retrofitService
+                .getSeriesDetails(seriesResultItemId)
+            try{
+                val seriesDetailsResult = getSeriesDetailsDeferred.await()
+                _seriesSeasons.value = seriesDetailsResult.seasons as List<SeriesSeasons>
+            }catch (e: java.lang.Exception){
                 Timber.d(e)
             }
         }

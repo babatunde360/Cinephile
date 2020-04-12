@@ -5,8 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.cinephile.databinding.FragmentSeriesCastPagerBinding
 import com.example.cinephile.ui.moviesdetail.CastFragmentAdapter
@@ -24,15 +23,13 @@ class SeriesCastFragment : Fragment() {
 
 
         val viewModel: SeriesDetailViewModel? =  parentFragment?.let {
-            ViewModelProviders.of(it)
+            ViewModelProvider(it)
                 .get(SeriesDetailViewModel::class.java)
         }
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-
-        viewModel?.seriesCastList?.observe(this, Observer {
-        })
+        
 
         val manager = GridLayoutManager(activity,2)
         binding.castRecyclerView.layoutManager = manager

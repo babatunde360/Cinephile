@@ -38,7 +38,7 @@ class SeriesViewModel: ViewModel(){
     }
 
     private fun getPopularSeries() {
-        coroutineScope.launch {
+        coroutineScope.launch(Dispatchers.IO){
             val getPopularSeriesDeferred = MovieApi.retrofitService.getPopularSeries()
             try {
                 val popularSeriesResult = getPopularSeriesDeferred.await()
@@ -50,7 +50,7 @@ class SeriesViewModel: ViewModel(){
     }
 
     private fun getTopRatedSeries() {
-        coroutineScope.launch {
+        coroutineScope.launch(Dispatchers.IO) {
             val getDeferredTopRated = MovieApi.retrofitService.getTopRatedSeries()
             try{
                 val seriesListResult = getDeferredTopRated.await()
@@ -64,7 +64,7 @@ class SeriesViewModel: ViewModel(){
     }
 
     private fun getAiringToday(){
-        coroutineScope.launch {
+        coroutineScope.launch(Dispatchers.IO){
             val getAiringTodayDeferred = MovieApi.retrofitService.getMovieAiringToday()
             try{
                 val airingTodayResult = getAiringTodayDeferred.await()
