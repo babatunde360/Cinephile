@@ -8,7 +8,7 @@
             type="com.example.cinephile.ui.movies.MovieViewModel" />
         <variable
             name="popularMovies"
-            type="com.example.cinephile.network.PopularMovies" />
+            type="com.example.cinephile.domain.PopularMovies" />
 
     </data>
     <LinearLayout

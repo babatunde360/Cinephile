@@ -3,7 +3,7 @@ package com.example.cinephile.ui.movies
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.cinephile.network.MovieResultsItem
+import com.example.cinephile.domain.MovieResultsItem
 import com.example.cinephile.ui.moviesdetail.MovieDetailViewModel
 
 class MovieDetailViewModelFactory(

@@ -3,10 +3,10 @@
 <data>
 <variable
     name="popularmovies"
-    type="com.example.cinephile.network.PopularMovies" />
+    type="com.example.cinephile.domain.PopularMovies" />
     <variable
         name="resultItem"
-        type="com.example.cinephile.network.MovieResultsItem" />
+        type="com.example.cinephile.domain.MovieResultsItem" />
     <variable
         name="viewmodel"
         type="com.example.cinephile.ui.movies.MovieViewModel" />

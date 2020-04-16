@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.cinephile.network.CastItem
 import com.example.cinephile.network.MovieApi
-import com.example.cinephile.network.MovieResultsItem
+import com.example.cinephile.domain.MovieResultsItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

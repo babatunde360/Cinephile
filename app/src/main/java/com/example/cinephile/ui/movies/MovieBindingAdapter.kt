@@ -5,10 +5,11 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.example.cinephile.R
 import com.example.cinephile.network.CastItem
-import com.example.cinephile.network.MovieResultsItem
+import com.example.cinephile.domain.MovieResultsItem
 import com.example.cinephile.ui.moviesdetail.CastFragmentAdapter
 
 
@@ -26,7 +27,9 @@ fun bindImage(imageView: ImageView, imageUrl: String?){
             .load(url)
             .apply(
                 RequestOptions().override(600,350)
+                    .timeout(30000)
                 .placeholder(R.drawable.loading_animation)
+                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                     .error(R.drawable.ic_broken_image))
             .into(imageView)
 

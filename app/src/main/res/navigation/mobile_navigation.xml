@@ -34,7 +34,7 @@
         android:name="com.example.cinephile.ui.moviesdetail.MovieDetailFragment">
         <argument
             android:name="selectedProperty"
-            app:argType="com.example.cinephile.network.MovieResultsItem" />
+            app:argType="com.example.cinephile.domain.MovieResultsItem" />
 
 
     </fragment>

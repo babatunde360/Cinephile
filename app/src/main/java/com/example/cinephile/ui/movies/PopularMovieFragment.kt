@@ -19,7 +19,10 @@ class PopularMovieFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val movieViewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
+        val application = requireNotNull(activity).application
+        val movieViewModel =
+            ViewModelProvider(this,MovieViewModelFactory(application))
+            .get(MovieViewModel::class.java)
 
         val binding = FragmentPopularMovieBinding.inflate(inflater)
         binding.lifecycleOwner = this
