@@ -4,9 +4,11 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.*
 
-
-@Database(entities = [DatabaseMovieResultsItem::class,DatabaseUpComingMovieResultItem::class]
-    ,version = 2,exportSchema = false)
+@Database(entities = [
+    DatabaseMovieResultsItem::class
+    ,DatabaseAiringTodaySeriesItem::class
+    ,DatabaseUpComingMovieResultItem::class]
+    ,version = 1,exportSchema = false)
 public abstract class MovieItemResultDatabase : RoomDatabase(){
     abstract fun cinephileDao(): CinephileDao
 

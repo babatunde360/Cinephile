@@ -37,6 +37,6 @@
         android:name="com.example.cinephile.ui.seriesdetail.SeriesDetailFragment">
         <argument
             android:name="selectedSeries"
-            app:argType="com.example.cinephile.network.SeriesResultsItem" />
+            app:argType="com.example.cinephile.domain.SeriesResultsItem" />
     </fragment>
 </navigation>

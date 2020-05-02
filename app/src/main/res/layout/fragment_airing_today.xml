@@ -6,7 +6,7 @@
     type="com.example.cinephile.ui.series.SeriesViewModel" />
         <variable
             name="AringToday"
-            type="com.example.cinephile.network.AiringToday" />
+            type="com.example.cinephile.domain.AiringToday" />
 
     </data>
 

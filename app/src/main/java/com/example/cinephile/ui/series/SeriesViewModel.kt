@@ -1,19 +1,27 @@
 package com.example.cinephile.ui.series
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.cinephile.database.MovieItemResultDatabase
 import com.example.cinephile.network.MovieApi
-import com.example.cinephile.network.SeriesResultsItem
+import com.example.cinephile.domain.SeriesResultsItem
+import com.example.cinephile.repository.CinephileRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class SeriesViewModel: ViewModel(){
+class SeriesViewModel(application: Application): AndroidViewModel(application){
     private val viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+
+    private val database = MovieItemResultDatabase.getDatabase(application)
+    private val repository = CinephileRepository(database)
+
 
     private val _topRatedList = MutableLiveData<List<SeriesResultsItem>>()
     val topRatedList: LiveData<List<SeriesResultsItem>>
@@ -23,18 +31,17 @@ class SeriesViewModel: ViewModel(){
     val popularSeriesList: LiveData<List<SeriesResultsItem>>
     get() = _popularSeriesList
 
-    private val _airingTodayList = MutableLiveData<List<SeriesResultsItem>>()
-    val airingTodayList : LiveData<List<SeriesResultsItem>>
-    get() = _airingTodayList
+    val airingTodayList = repository.airingToday
 
     private val _navigateToSelectedProperty = MutableLiveData<SeriesResultsItem>()
     val navigateToSelectedProperty : LiveData<SeriesResultsItem>
         get() = _navigateToSelectedProperty
 
+
     init {
-        getTopRatedSeries()
-        getAiringToday()
-        getPopularSeries()
+        coroutineScope.launch {
+            repository.refreshAiringToday()
+        }
     }
 
     private fun getPopularSeries() {
@@ -63,17 +70,6 @@ class SeriesViewModel: ViewModel(){
         }
     }
 
-    private fun getAiringToday(){
-        coroutineScope.launch(Dispatchers.IO){
-            val getAiringTodayDeferred = MovieApi.retrofitService.getMovieAiringToday()
-            try{
-                val airingTodayResult = getAiringTodayDeferred.await()
-                _airingTodayList.value = airingTodayResult.results as List<SeriesResultsItem>?
-            }catch (e: Exception){
-                Timber.d(e)
-            }
-        }
-    }
 
 
     fun displayPropertyDetails(itemSeries: SeriesResultsItem){

@@ -1,6 +1,6 @@
 package com.example.cinephile.network
 
-import com.example.cinephile.domain.UpcomingMovies
+import com.example.cinephile.domain.AiringToday
 import com.example.cinephile.ui.series.PopularSeries
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
@@ -35,9 +35,9 @@ interface MovieApiInterface {
     fun getSeriesCast(@Path("seriesId") seriesId: Int?):
             Deferred<SeriesCredits>
 
-    @GET("tv/airing_today?api_key=${api_key}&language=en-US")
-    fun getMovieAiringToday():
-            Deferred<AiringToday>
+    @GET("tv/airing_today?api_key=${api_key}&language=en-US&timezone=gmt+1")
+    fun getSeriesAiringToday():
+            Deferred<NetworkAiringToday>
 
     @GET("tv/top_rated?api_key=${api_key}&language=en-US")
     fun getTopRatedSeries():

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.cinephile.R
-import com.example.cinephile.network.SeriesResultsItem
+import com.example.cinephile.domain.SeriesResultsItem
 import com.example.cinephile.network.SeriesSeasons
 import com.example.cinephile.ui.seriesdetail.SeriesSeasonAdapter
 
@@ -40,7 +40,8 @@ fun bindImage(imageView: ImageView, imageUrl: String?) {
         Glide.with(imageView.context)
             .load(url)
             .apply(
-                RequestOptions().override(600,350)
+                RequestOptions()
+                    .timeout(30000)
                     .placeholder(R.drawable.loading_animation)
                     .error(R.drawable.ic_broken_image)
             )

@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cinephile.databinding.SeriesSeasonViewItemBinding
-import com.example.cinephile.network.SeriesResultsItem
 import com.example.cinephile.network.SeriesSeasons
 
 class SeriesSeasonAdapter :

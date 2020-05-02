@@ -1,5 +1,6 @@
 package com.example.cinephile.network
 
+import com.example.cinephile.domain.SeriesResultsItem
 import com.squareup.moshi.Json
 
 data class TopRated(

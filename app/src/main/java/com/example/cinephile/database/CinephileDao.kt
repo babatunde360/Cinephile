@@ -22,4 +22,12 @@ interface CinephileDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertUpComingMovies(vararg upComingMovies: DatabaseUpComingMovieResultItem)
+
+    //Series AiringToday
+    @Query("select * from databaseairingtodayseriesitem")
+    fun getAiringTodaySeries(): LiveData<List<DatabaseAiringTodaySeriesItem>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAiringToday(vararg airingToday: DatabaseAiringTodaySeriesItem)
+
 }

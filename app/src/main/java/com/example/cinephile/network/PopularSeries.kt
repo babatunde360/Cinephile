@@ -1,6 +1,6 @@
 package com.example.cinephile.ui.series
 
-import com.example.cinephile.network.SeriesResultsItem
+import com.example.cinephile.domain.SeriesResultsItem
 import com.squareup.moshi.Json
 
 data class PopularSeries(
