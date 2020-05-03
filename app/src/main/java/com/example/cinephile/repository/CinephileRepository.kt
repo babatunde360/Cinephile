@@ -55,4 +55,10 @@ class CinephileRepository(private val database: MovieItemResultDatabase){
         Transformations.map(database.cinephileDao().getAiringTodaySeries()){
             it.asDomainModel()
         }
+
+    suspend fun deleteAiringToday(){
+        withContext(Dispatchers.IO){
+            database.cinephileDao().deleteairingtoday()
+        }
+    }
 }

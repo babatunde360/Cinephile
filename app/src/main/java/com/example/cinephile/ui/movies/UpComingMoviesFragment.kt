@@ -22,7 +22,8 @@ class UpComingMoviesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val movieViewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
+        val application = requireNotNull(activity).application
+        val movieViewModel = ViewModelProvider(this,MovieViewModelFactory(application,context)).get(MovieViewModel::class.java)
 
         val binding = FragmentUpComingMoviesBinding.inflate(inflater)
         binding.lifecycleOwner = this

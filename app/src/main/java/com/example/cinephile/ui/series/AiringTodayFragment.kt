@@ -20,7 +20,10 @@ class AiringTodayFragment : Fragment() {
         val binding = FragmentAiringTodayBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
-        val seriesViewModel = ViewModelProvider(this)
+        val application = requireNotNull(activity).application
+
+        val seriesViewModel =
+            ViewModelProvider(this,SeriesViewModelFactory(application,context))
             .get(SeriesViewModel::class.java)
 
         binding.seriesViewModel = seriesViewModel

@@ -19,22 +19,25 @@ class TopRatedFragment : Fragment() {
     ): View? {
        val binding = FragmentTopRatedBinding.inflate(inflater)
 
-        val viewModel = ViewModelProvider(this).get(SeriesViewModel::class.java)
+        val application = requireNotNull(activity).application
+        val seriesViewModel =
+            ViewModelProvider(this,SeriesViewModelFactory(application,context))
+                .get(SeriesViewModel::class.java)
         binding.lifecycleOwner = this
 
 
         binding.topRatedRecyclerView.layoutManager = GridLayoutManager(activity,2)
         binding.topRatedRecyclerView.adapter = SeriesAdapter(SeriesAdapter.OnClickListener{
-            viewModel.displayPropertyDetails(it)
+            seriesViewModel.displayPropertyDetails(it)
         })
-        viewModel.navigateToSelectedProperty.observe(viewLifecycleOwner, Observer {
+        seriesViewModel.navigateToSelectedProperty.observe(viewLifecycleOwner, Observer {
             if(it != null){
                 this.findNavController().navigate(SeriesFragmentDirections.actionNavSeriesToSeriesDetailFragment(it))
-                viewModel.displayPropertyDetailsComplete()
+                seriesViewModel.displayPropertyDetailsComplete()
             }
         })
 
-        binding.viewModel = viewModel
+        binding.viewModel = seriesViewModel
 
         return binding.root
     }

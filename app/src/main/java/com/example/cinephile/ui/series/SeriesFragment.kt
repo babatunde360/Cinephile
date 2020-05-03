@@ -13,9 +13,6 @@ class SeriesFragment : Fragment(){
 
     lateinit var binding: FragmentSeriesBinding
 
-    private val seriesViewModel by lazy {
-        ViewModelProvider(this).get(SeriesViewModel::class.java)
-    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -23,6 +20,11 @@ class SeriesFragment : Fragment(){
     ): View? {
          binding = FragmentSeriesBinding.inflate(inflater)
         binding.lifecycleOwner = this
+
+        val application = requireNotNull(activity).application
+         val seriesViewModel =
+            ViewModelProvider(this,SeriesViewModelFactory(application,context)).get(SeriesViewModel::class.java)
+
 
         binding.viewmodel = seriesViewModel
 

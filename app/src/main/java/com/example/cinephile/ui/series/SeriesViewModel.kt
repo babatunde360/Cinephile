@@ -1,21 +1,24 @@
 package com.example.cinephile.ui.series
 
 import android.app.Application
+import android.content.Context
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.cinephile.database.MovieItemResultDatabase
 import com.example.cinephile.network.MovieApi
 import com.example.cinephile.domain.SeriesResultsItem
 import com.example.cinephile.repository.CinephileRepository
+import com.example.cinephile.utils.isOnline
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class SeriesViewModel(application: Application): AndroidViewModel(application){
+class SeriesViewModel(application: Application, context: Context?): AndroidViewModel(application){
     private val viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
@@ -37,10 +40,16 @@ class SeriesViewModel(application: Application): AndroidViewModel(application){
     val navigateToSelectedProperty : LiveData<SeriesResultsItem>
         get() = _navigateToSelectedProperty
 
+    @RequiresApi(Build.VERSION_CODES.M)
+    val isConnected = isOnline(context)
+
 
     init {
         coroutineScope.launch {
-            repository.refreshAiringToday()
+            if(isConnected) {
+                repository.deleteAiringToday()
+                repository.refreshAiringToday()
+            }
         }
     }
 

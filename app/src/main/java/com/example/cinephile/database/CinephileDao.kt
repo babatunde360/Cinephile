@@ -30,4 +30,8 @@ interface CinephileDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAiringToday(vararg airingToday: DatabaseAiringTodaySeriesItem)
 
+    @Query("delete from databaseairingtodayseriesitem")
+    fun deleteairingtoday()
+
+
 }

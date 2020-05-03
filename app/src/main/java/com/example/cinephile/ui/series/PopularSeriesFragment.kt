@@ -24,7 +24,13 @@ class PopularSeriesFragment : Fragment() {
         val binding = FragmentPopularSeriesBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
-        val viewModel = ViewModelProvider(this).get(SeriesViewModel::class.java)
+
+        val application = requireNotNull(activity).application
+
+        val viewModel =
+            ViewModelProvider(this,SeriesViewModelFactory(application,context)).
+            get(SeriesViewModel::class.java)
+
         binding.viewModel = viewModel
 
         binding.popularSeriesRecyclerView.adapter = SeriesAdapter(SeriesAdapter.OnClickListener{
