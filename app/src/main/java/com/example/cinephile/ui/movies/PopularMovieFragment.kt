@@ -30,9 +30,12 @@ class PopularMovieFragment : Fragment() {
         binding.viewModel = movieViewModel
 
         binding.movieRecyclerView.layoutManager = GridLayoutManager(activity,2)
-        binding.movieRecyclerView.adapter = MovieAdapter(MovieAdapter.OnClickListener {
-            movieViewModel.displayPropertyDetails(it)
+        val moviePagingAdapter = MoviePagingAdapter()
+        binding.movieRecyclerView.adapter = moviePagingAdapter
+        movieViewModel.movieList.observe(viewLifecycleOwner, Observer {
+         moviePagingAdapter.submitList(it)
         })
+
         movieViewModel.navigateToSelectedProperty.observe(viewLifecycleOwner, Observer {
             if(it != null){
                 this.findNavController().navigate(MovieFragmentDirections.actionShowDetail(it))

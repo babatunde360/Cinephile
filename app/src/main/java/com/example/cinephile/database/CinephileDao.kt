@@ -1,17 +1,19 @@
 package com.example.cinephile.database
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.cinephile.domain.MovieResultsItem
 
 @Dao
 interface CinephileDao {
 
     //PopularMovies
     @Query("select * from databasemovieresultsitem")
-    fun getPopularMovies(): LiveData<List<DatabaseMovieResultsItem>>
+    fun getPopularMovies(): DataSource.Factory<Int, MovieResultsItem>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg videos: DatabaseMovieResultsItem)

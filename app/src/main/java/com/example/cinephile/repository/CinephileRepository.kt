@@ -2,17 +2,23 @@ package com.example.cinephile.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.example.cinephile.database.MovieItemResultDatabase
 import com.example.cinephile.database.asDomainModel
-import com.example.cinephile.network.asDatabaseModel
 import com.example.cinephile.domain.MovieResultsItem
 import com.example.cinephile.domain.SeriesResultsItem
 import com.example.cinephile.network.MovieApi
+import com.example.cinephile.network.asDatabaseModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 
 class CinephileRepository(private val database: MovieItemResultDatabase){
+
+    companion object {
+        private const val PAGE_SIZE = 10
+        private const val INITIAL_LOAD_SIZE_HINT = 20
+    }
 
     //PopularMovies
     suspend fun refreshPopularMovies(){
@@ -23,10 +29,18 @@ class CinephileRepository(private val database: MovieItemResultDatabase){
         }
     }
 
-    val popularMovies: LiveData<List<MovieResultsItem>> =
-        Transformations.map(database.cinephileDao().getPopularMovies()){
-            it.asDomainModel()
-        }
+    private val popularMoviesFactory =
+        database.cinephileDao().getPopularMovies()
+
+    private val pagedListConfig = PagedList.Config.Builder()
+        .setEnablePlaceholders(true)
+        .setInitialLoadSizeHint(INITIAL_LOAD_SIZE_HINT)
+        .setPageSize(PAGE_SIZE)
+        .build()
+
+    val popularMoviesData =
+        LivePagedListBuilder(popularMoviesFactory,pagedListConfig).build()
+
 
 
     //UpcomingMovies
