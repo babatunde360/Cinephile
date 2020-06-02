@@ -29,11 +29,13 @@ class UpComingMoviesFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = movieViewModel
 
+        binding.movieRecyclerView.apply {
+            layoutManager = GridLayoutManager(activity,2)
+            adapter = MoviePagingAdapter(MoviePagingAdapter.OnClickListener{
+                movieViewModel.displayPropertyDetails(it)
+            })
+        }
 
-        binding.movieRecyclerView.layoutManager = GridLayoutManager(activity, 2)
-        binding.movieRecyclerView.adapter = MovieAdapter(MovieAdapter.OnClickListener {
-            movieViewModel.displayPropertyDetails(it)
-        })
 
         movieViewModel.navigateToSelectedProperty.observe(viewLifecycleOwner, Observer {
             if(it != null){

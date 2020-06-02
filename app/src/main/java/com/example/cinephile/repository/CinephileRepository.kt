@@ -6,7 +6,6 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.example.cinephile.database.MovieItemResultDatabase
 import com.example.cinephile.database.asDomainModel
-import com.example.cinephile.domain.MovieResultsItem
 import com.example.cinephile.domain.SeriesResultsItem
 import com.example.cinephile.network.MovieApi
 import com.example.cinephile.network.asDatabaseModel
@@ -51,10 +50,10 @@ class CinephileRepository(private val database: MovieItemResultDatabase){
             database.cinephileDao().insertUpComingMovies(*upComingMovies.asDatabaseModel())
         }
     }
-        val upComingMovies:LiveData<List<MovieResultsItem>> =
-            Transformations.map(database.cinephileDao().getUpComingMovies()){
-                it.asDomainModel()
-            }
+    private val upComingMoviesFactory =
+        database.cinephileDao().getUpComingMovies()
+
+    val upComingMovies  = LivePagedListBuilder(upComingMoviesFactory,pagedListConfig).build()
 
     //Series AiringToday
     suspend fun refreshAiringToday(){

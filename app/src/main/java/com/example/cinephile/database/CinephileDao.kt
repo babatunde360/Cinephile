@@ -20,7 +20,7 @@ interface CinephileDao {
 
     //UpComingMovies
     @Query("select * from databaseupcomingmovieresultitem")
-    fun getUpComingMovies(): LiveData<List<DatabaseUpComingMovieResultItem>>
+    fun getUpComingMovies(): DataSource.Factory<Int, MovieResultsItem>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertUpComingMovies(vararg upComingMovies: DatabaseUpComingMovieResultItem)

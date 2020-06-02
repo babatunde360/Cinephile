@@ -3,19 +3,20 @@ package com.example.cinephile.ui.movies
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.example.cinephile.R
-import com.example.cinephile.network.CastItem
 import com.example.cinephile.domain.MovieResultsItem
+import com.example.cinephile.network.CastItem
 import com.example.cinephile.ui.moviesdetail.CastFragmentAdapter
 
 
-@BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<MovieResultsItem>?){
-    val adapter = recyclerView.adapter as MovieAdapter
+@BindingAdapter("pagedData")
+fun bindRecyclerView(recyclerView: RecyclerView, data: PagedList<MovieResultsItem>?){
+    val adapter = recyclerView.adapter as MoviePagingAdapter
     adapter.submitList(data)
 }
 

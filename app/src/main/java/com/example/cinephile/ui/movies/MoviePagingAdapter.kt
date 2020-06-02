@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cinephile.databinding.MovieViewItemBinding
 import com.example.cinephile.domain.MovieResultsItem
 
-class MoviePagingAdapter() :
+class MoviePagingAdapter(val onClickListener: OnClickListener) :
     PagedListAdapter<MovieResultsItem,MoviePagingAdapter.MovieViewHolder>(DIFF_CALLBACK){
     class MovieViewHolder(private var binding: MovieViewItemBinding):
         RecyclerView.ViewHolder(binding.root) {
@@ -29,7 +29,7 @@ class MoviePagingAdapter() :
         if (currentMovie != null) {
             holder.bind(currentMovie)
             holder.itemView.setOnClickListener {
-                //onClickListener.onClick(currentMovie)
+                onClickListener.onClick(currentMovie)
             }
         }
     }
@@ -54,7 +54,7 @@ class MoviePagingAdapter() :
 
         }
     }
-//    class OnClickListener(val clickListener: (itemMovie: MovieResultsItem) -> Unit){
-//        fun onClick(itemMovie: MovieResultsItem) = clickListener(itemMovie)
-//    }
+    class OnClickListener(val clickListener: (itemMovie: MovieResultsItem) -> Unit){
+        fun onClick(itemMovie: MovieResultsItem) = clickListener(itemMovie)
+   }
 }

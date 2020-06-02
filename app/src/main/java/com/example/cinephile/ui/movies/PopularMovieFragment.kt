@@ -29,12 +29,12 @@ class PopularMovieFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = movieViewModel
 
-        binding.movieRecyclerView.layoutManager = GridLayoutManager(activity,2)
-        val moviePagingAdapter = MoviePagingAdapter()
-        binding.movieRecyclerView.adapter = moviePagingAdapter
-        movieViewModel.movieList.observe(viewLifecycleOwner, Observer {
-         moviePagingAdapter.submitList(it)
-        })
+        binding.movieRecyclerView.apply {
+            layoutManager = GridLayoutManager(activity,2)
+            adapter = MoviePagingAdapter(MoviePagingAdapter.OnClickListener{
+                movieViewModel.displayPropertyDetails(it)
+            })
+        }
 
         movieViewModel.navigateToSelectedProperty.observe(viewLifecycleOwner, Observer {
             if(it != null){
