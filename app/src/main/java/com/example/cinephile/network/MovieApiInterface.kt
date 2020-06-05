@@ -1,6 +1,5 @@
 package com.example.cinephile.network
 
-import com.example.cinephile.domain.AiringToday
 import com.example.cinephile.ui.series.PopularSeries
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
@@ -10,7 +9,7 @@ private const val api_key= PrivateApiKey
 
 interface MovieApiInterface {
     @GET("movie/popular?api_key=${api_key}")
-    fun getLatestMovies():
+    fun getPopularMovies():
             Deferred<NetworkPopularMovies>
 
     @GET("movie/upcoming?api_key=${api_key}&language=en-US&region=us")

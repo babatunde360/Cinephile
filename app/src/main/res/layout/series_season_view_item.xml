@@ -13,12 +13,13 @@
         android:layout_height="wrap_content">
 
         <ImageView
+            android:contentDescription="@string/season_image"
             android:id="@+id/imageView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            seriesImage="@{seriesItem.posterPath}"
+            loadImage="@{seriesItem.posterPath}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

@@ -16,7 +16,7 @@ interface CinephileDao {
     fun getPopularMovies(): DataSource.Factory<Int, MovieResultsItem>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg videos: DatabaseMovieResultsItem)
+    fun insertPopularMovies(vararg videos: DatabaseMovieResultsItem)
 
     //UpComingMovies
     @Query("select * from databaseupcomingmovieresultitem")

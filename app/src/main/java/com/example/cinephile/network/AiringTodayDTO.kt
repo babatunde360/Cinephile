@@ -12,7 +12,7 @@ data class NetworkAiringToday(
     @Json(name="total_results")
     val totalResults: Int?,
     @Json(name="total_pages")
-    val totalPages: Int?,
+    val totalPages: Int,
     @Json(name="results")
     val results: List<SeriesResultsItem?>
 )

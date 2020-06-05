@@ -20,14 +20,13 @@ class CinephileRepository(private val database: MovieItemResultDatabase){
     }
 
     //PopularMovies
-    suspend fun refreshPopularMovies(){
-        withContext(Dispatchers.IO){
+    suspend fun refreshPopularMovies() {
+        withContext(Dispatchers.IO) {
             val popularMovies =
-                MovieApi.retrofitService.getLatestMovies().await()
-            database.cinephileDao().insertAll(*popularMovies.asDatabaseModel())
+                MovieApi.retrofitService.getPopularMovies().await()
+            database.cinephileDao().insertPopularMovies(*popularMovies.asDatabaseModel())
         }
     }
-
     private val popularMoviesFactory =
         database.cinephileDao().getPopularMovies()
 
@@ -64,6 +63,7 @@ class CinephileRepository(private val database: MovieItemResultDatabase){
 
         }
     }
+
     val airingToday:LiveData<List<SeriesResultsItem>> =
         Transformations.map(database.cinephileDao().getAiringTodaySeries()){
             it.asDomainModel()

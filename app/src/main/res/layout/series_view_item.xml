@@ -31,7 +31,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars"
-                seriesImage="@{currentSeries.posterPath}"
+                loadImage="@{currentSeries.posterPath}"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

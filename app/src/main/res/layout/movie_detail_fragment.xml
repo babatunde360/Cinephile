@@ -30,7 +30,7 @@
                 android:fitsSystemWindows="true">
                 <ImageView
                     android:id="@+id/movieImage"
-                    movieImage="@{movieDetailViewModel.selectedProperty.backdropPath}"
+                    loadImage="@{movieDetailViewModel.selectedProperty.backdropPath}"
                     android:layout_width="match_parent"
                     android:layout_height="390dp"
                     android:contentDescription="@string/movie_image_poster"
