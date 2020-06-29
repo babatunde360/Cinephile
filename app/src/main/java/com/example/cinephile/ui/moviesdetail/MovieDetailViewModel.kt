@@ -4,9 +4,9 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.cinephile.domain.MovieResultsItem
 import com.example.cinephile.network.CastItem
 import com.example.cinephile.network.MovieApi
-import com.example.cinephile.domain.MovieResultsItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -15,8 +15,7 @@ import timber.log.Timber
 
 class MovieDetailViewModel(movieResultsItem: MovieResultsItem, app: Application) : AndroidViewModel(app) {
 
-    private val job = Job()
-    private val coroutineScope = CoroutineScope(job + Dispatchers.Main)
+    private val coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
 
     private val _selectedProperty = MutableLiveData<MovieResultsItem>()
     val selectedProperty: LiveData<MovieResultsItem>
@@ -26,29 +25,30 @@ class MovieDetailViewModel(movieResultsItem: MovieResultsItem, app: Application)
     val movieCastList: LiveData<List<CastItem>>
     get() = _movieCastList
 
-    private val _movieListNo = MutableLiveData<String>()
-    val movieListNo: LiveData<String>
-        get() = _movieListNo
-
-
-    val movieResultItemId: Int? = movieResultsItem.id
+    private val movieResultItemId: Int? = movieResultsItem.id
     init {
         _selectedProperty.value = movieResultsItem
-        movieResultItemId?.let { getMovieCast(it) }
+        movieResultItemId?.let {
+            getMovieCast(it)
+        }
 
     }
 
     private fun getMovieCast(movieResultItemId: Int){
-        coroutineScope.launch(Dispatchers.IO){
-            val getCastDeferred = MovieApi.retrofitService.getMovieCast(movieResultItemId)
+        coroutineScope.launch(Dispatchers.Main) {
+            val getMovieCastDeferred = MovieApi.retrofitService
+                .getMovieCast(movieResultItemId)
             try{
-                val movieListResult = getCastDeferred.await()
-                _movieCastList.value = movieListResult.cast as List<CastItem>?
-                _movieListNo.value = movieListResult.cast?.size.toString()
-
+                val movieCastResult = getMovieCastDeferred.await()
+                _movieCastList.value = movieCastResult.cast as List<CastItem>
             }catch (e: Exception){
                 Timber.d(e)
             }
+
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
     }
 }

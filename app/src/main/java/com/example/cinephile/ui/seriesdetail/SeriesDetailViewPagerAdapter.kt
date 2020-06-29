@@ -11,12 +11,12 @@ class SeriesDetailViewPagerAdapter (fragment: Fragment)
             }
 
     override fun createFragment(position: Int): Fragment {
-        when(position){
+        return when(position){
             0->{
-                return SeriesCastFragment()
+                SeriesCastFragment()
             }
             else->{
-                return SeriesSeasonFragment()
+                SeriesSeasonFragment()
             }
         }
 

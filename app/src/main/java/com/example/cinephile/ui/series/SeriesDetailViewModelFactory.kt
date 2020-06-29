@@ -7,9 +7,9 @@ import com.example.cinephile.domain.SeriesResultsItem
 import com.example.cinephile.ui.seriesdetail.SeriesDetailViewModel
 
 class SeriesDetailViewModelFactory (
-    private val seriesResultsItem: SeriesResultsItem,
+    private val seriesResultsItem: SeriesResultsItem?,
     private val application: Application): ViewModelProvider.Factory{
-    @Suppress("uncecked_cast")
+    @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if(modelClass.isAssignableFrom(SeriesDetailViewModel::class.java)){
             return SeriesDetailViewModel(seriesResultsItem,application) as T

@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.cinephile.databinding.SeriesDetailFragmentBinding
@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.series_detail_fragment.*
 
 class SeriesDetailFragment : Fragment() {
 
-    private lateinit var viewModel: SeriesDetailViewModel
     private lateinit var binding: SeriesDetailFragmentBinding
 
     override fun onCreateView(
@@ -29,23 +28,20 @@ class SeriesDetailFragment : Fragment() {
         val seriesResultItem = arguments?.
             let { SeriesDetailFragmentArgs.fromBundle(it).selectedSeries }
 
-        val viewModelFactory = seriesResultItem?.
-            let { SeriesDetailViewModelFactory(it,application) }
+        val viewModels:SeriesDetailViewModel by viewModels{ SeriesDetailViewModelFactory(
+            seriesResultItem,application) }
 
-        viewModel = ViewModelProviders.of(this,viewModelFactory).get(SeriesDetailViewModel::class.java)
         binding.seriesDetailviewPager.adapter = SeriesDetailViewPagerAdapter(this)
 
-        binding.seriesDetailViewModel = viewModel
-
+        binding.seriesDetailViewModel = viewModels
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        NavigationUI.setupWithNavController(series_detail_toolbar,findNavController())
         val seriesDetailTabs = binding.seriesDetailTabs
         val seriesDetailViewPager = binding.seriesDetailviewPager
-        NavigationUI.setupWithNavController(series_detail_toolbar,findNavController())
-
 
         TabLayoutMediator(seriesDetailTabs,seriesDetailViewPager){tab, position ->
             when(position){

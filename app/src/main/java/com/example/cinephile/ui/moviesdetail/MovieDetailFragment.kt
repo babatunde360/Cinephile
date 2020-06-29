@@ -30,7 +30,7 @@ class MovieDetailFragment : Fragment() {
         binding.viewPager.adapter = viewPagerAdapter
 
 
-        val resultsItem = MovieDetailFragmentArgs.fromBundle(arguments!!).selectedProperty
+        val resultsItem = MovieDetailFragmentArgs.fromBundle(requireArguments()).selectedProperty
         val viewModelFactory = MovieDetailViewModelFactory(resultsItem,application)
 
 
@@ -46,7 +46,7 @@ class MovieDetailFragment : Fragment() {
         TabLayoutMediator(tabLayout, binding.viewPager){tab, position ->
             when(position){
                 0 ->{
-                    tab.text = "Cast"
+                    tab.text = "Info"
                 }
                 1 ->{
                     tab.text = "Screening"

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cinephile.databinding.MovieCastViewItemBinding
 import com.example.cinephile.network.CastItem
 
-class CastFragmentAdapter : ListAdapter<CastItem,CastFragmentAdapter.CastViewHolder>(DiffCallback) {
+class CastAdapter : ListAdapter<CastItem,CastAdapter.CastViewHolder>(DiffCallback) {
 
     class CastViewHolder(private val binding: MovieCastViewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {

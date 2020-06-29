@@ -5,14 +5,16 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.cinephile.domain.SeriesResultsItem
-import com.example.cinephile.network.*
+import com.example.cinephile.network.CastItem
+import com.example.cinephile.network.MovieApi
+import com.example.cinephile.network.SeriesSeasons
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class SeriesDetailViewModel(seriesResultItem : SeriesResultsItem, app: Application)
+class SeriesDetailViewModel(seriesResultItem : SeriesResultsItem?, app: Application)
     : AndroidViewModel(app) {
 
 private val job = Job()
@@ -30,19 +32,17 @@ private val job = Job()
     val seriesCastList: LiveData<List<CastItem>>
         get() = _seriesCastList
 
-
-
-    val seriesResultsItemId = seriesResultItem.id
+    private val seriesResultsItemId = seriesResultItem?.id
     init {
         _selectedProperty.value = seriesResultItem
         seriesResultsItemId?.let {
             getSeriesCast(it)
             getSeriesDetails(it)
         }
-
     }
+
     private fun getSeriesCast(seriesResultItemId: Int){
-        coroutineScope.launch(Dispatchers.IO){
+        coroutineScope.launch(Dispatchers.Main){
             val getSeriesCastDeferred = MovieApi.retrofitService.getSeriesCast(seriesResultItemId)
             try{
                 val seriesCastResult = getSeriesCastDeferred.await()
@@ -54,7 +54,7 @@ private val job = Job()
     }
 
     private fun getSeriesDetails(seriesResultItemId: Int){
-        coroutineScope.launch(Dispatchers.IO){
+        coroutineScope.launch(Dispatchers.Main){
             val getSeriesDetailsDeferred = MovieApi.retrofitService
                 .getSeriesDetails(seriesResultItemId)
             try{
@@ -65,5 +65,4 @@ private val job = Job()
             }
         }
     }
-
 }

@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.cinephile.databinding.FragmentSeriesCastPagerBinding
-import com.example.cinephile.ui.moviesdetail.CastFragmentAdapter
+import com.example.cinephile.ui.moviesdetail.CastAdapter
 
 
 class SeriesCastFragment : Fragment() {
@@ -20,7 +21,7 @@ class SeriesCastFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentSeriesCastPagerBinding.inflate(inflater)
-
+        binding.lifecycleOwner = this
 
         val viewModel: SeriesDetailViewModel? =  parentFragment?.let {
             ViewModelProvider(it)
@@ -28,12 +29,11 @@ class SeriesCastFragment : Fragment() {
         }
 
         binding.viewModel = viewModel
-        binding.lifecycleOwner = this
-        
 
-        val manager = GridLayoutManager(activity,2)
-        binding.castRecyclerView.layoutManager = manager
-        binding.castRecyclerView.adapter = CastFragmentAdapter()
+        binding.castRecyclerView.apply {
+            layoutManager =  LinearLayoutManager(activity,RecyclerView.HORIZONTAL,false)
+           adapter = CastAdapter()
+        }
 
         return binding.root
     }
