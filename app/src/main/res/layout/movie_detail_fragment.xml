@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
-            name="movieDetailViewModel"
+            name="viewModel"
             type="com.example.cinephile.ui.moviesdetail.MovieDetailViewModel" />
     </data>
 
@@ -24,13 +24,13 @@
                 android:layout_height="wrap_content"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
                 app:expandedTitleTextAppearance="@style/whiteBackButton"
-                app:title="@{movieDetailViewModel.selectedProperty.title}"
+                app:title="@{viewModel.selectedProperty.title}"
                 app:expandedTitleMarginStart="48dp"
                 app:expandedTitleMarginEnd="64dp"
                 android:fitsSystemWindows="true">
                 <ImageView
                     android:id="@+id/movieImage"
-                    loadImage="@{movieDetailViewModel.selectedProperty.backdropPath}"
+                    loadImage="@{viewModel.selectedProperty.backdropPath}"
                     android:layout_width="match_parent"
                     android:layout_height="390dp"
                     android:contentDescription="@string/movie_image_poster"
@@ -44,23 +44,13 @@
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                     app:layout_collapseMode="pin"/>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabs"
-                android:layout_gravity="bottom"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fitsSystemWindows="true"
-                app:layout_collapseMode="pin"
-                app:tabMode="fixed"
-                app:tabGravity="fill"
-                />
         </com.google.android.material.appbar.AppBarLayout>
 
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scroll"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:clipToPadding="false"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -68,14 +58,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:id="@+id/viewPager"/>
-
+                <include
+                    android:id="@+id/movie_cast"
+                    app:viewModel = "@{viewModel}"
+                    layout="@layout/fragment_movie_cast_pager"/>
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
