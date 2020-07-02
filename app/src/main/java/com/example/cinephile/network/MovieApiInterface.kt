@@ -9,41 +9,44 @@ private const val api_key= PrivateApiKey
 
 interface MovieApiInterface {
     @GET("movie/popular?api_key=${api_key}")
-    fun getPopularMovies():
+    fun getPopularMoviesAsync():
             Deferred<NetworkPopularMovies>
 
     @GET("movie/upcoming?api_key=${api_key}&language=en-US&region=us")
-    fun getUpComingMovies():
+    fun getUpComingMoviesAsync():
             Deferred<NetworkUpComingMovies>
 
 
     @GET("tv/top_rated?api_key=${api_key}")
-    fun getLatestSeries():
+    fun getLatestSeriesAsync():
             Deferred<Series>
 
     @GET("movie/{movieId}/credits?api_key=${api_key}")
-    fun getMovieCast(@Path("movieId") movieId: Int?):
+    fun getMovieCastAsync(@Path("movieId") movieId: Int?):
             Deferred<MovieCredits>
 
+    @GET("movie/{movieId}/videos?api_key=${api_key}&language=en-US")
+    fun getMovieTrailerAsync(@Path("movieId") movieId: Int?):
+            Deferred<MovieVideos>
 
     @GET("/3/tv/{seriesId}?api_key=${api_key}&language=en-US")
-    fun getSeriesDetails(@Path("seriesId") seriesId: Int?):
+    fun getSeriesDetailsAsync(@Path("seriesId") seriesId: Int?):
             Deferred<SeriesDetails>
 
     @GET("tv/{seriesId}/credits?api_key=${api_key}&language=en-US")
-    fun getSeriesCast(@Path("seriesId") seriesId: Int?):
+    fun getSeriesCastAsync(@Path("seriesId") seriesId: Int?):
             Deferred<SeriesCredits>
 
     @GET("tv/airing_today?api_key=${api_key}&language=en-US&timezone=gmt+1")
-    fun getSeriesAiringToday():
+    fun getSeriesAiringTodayAsync():
             Deferred<NetworkAiringToday>
 
     @GET("tv/top_rated?api_key=${api_key}&language=en-US")
-    fun getTopRatedSeries():
+    fun getTopRatedSeriesAsync():
             Deferred<TopRated>
 
     @GET("tv/popular?api_key=${api_key}&language=en-US")
-    fun getPopularSeries():
+    fun getPopularSeriesAsync():
             Deferred<PopularSeries>
 
 

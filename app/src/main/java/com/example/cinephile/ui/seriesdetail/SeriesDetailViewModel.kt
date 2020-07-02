@@ -43,7 +43,7 @@ private val job = Job()
 
     private fun getSeriesCast(seriesResultItemId: Int){
         coroutineScope.launch(Dispatchers.Main){
-            val getSeriesCastDeferred = MovieApi.retrofitService.getSeriesCast(seriesResultItemId)
+            val getSeriesCastDeferred = MovieApi.retrofitService.getSeriesCastAsync(seriesResultItemId)
             try{
                 val seriesCastResult = getSeriesCastDeferred.await()
                 _seriesCastList.value = seriesCastResult.cast as List<CastItem>
@@ -56,7 +56,7 @@ private val job = Job()
     private fun getSeriesDetails(seriesResultItemId: Int){
         coroutineScope.launch(Dispatchers.Main){
             val getSeriesDetailsDeferred = MovieApi.retrofitService
-                .getSeriesDetails(seriesResultItemId)
+                .getSeriesDetailsAsync(seriesResultItemId)
             try{
                 val seriesDetailsResult = getSeriesDetailsDeferred.await()
                 _seriesSeasons.value = seriesDetailsResult.seasons as List<SeriesSeasons>

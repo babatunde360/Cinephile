@@ -23,7 +23,7 @@ class CinephileRepository(private val database: MovieItemResultDatabase){
     suspend fun refreshPopularMovies() {
         withContext(Dispatchers.IO) {
             val popularMovies =
-                MovieApi.retrofitService.getPopularMovies().await()
+                MovieApi.retrofitService.getPopularMoviesAsync().await()
             database.cinephileDao().insertPopularMovies(*popularMovies.asDatabaseModel())
         }
     }
@@ -45,7 +45,7 @@ class CinephileRepository(private val database: MovieItemResultDatabase){
     suspend fun refreshUpcomingMovies() {
         withContext(Dispatchers.IO) {
             val upComingMovies =
-                MovieApi.retrofitService.getUpComingMovies().await()
+                MovieApi.retrofitService.getUpComingMoviesAsync().await()
             database.cinephileDao().insertUpComingMovies(*upComingMovies.asDatabaseModel())
         }
     }
@@ -58,7 +58,7 @@ class CinephileRepository(private val database: MovieItemResultDatabase){
     suspend fun refreshAiringToday(){
         withContext(Dispatchers.IO){
             val airingToday =
-                MovieApi.retrofitService.getSeriesAiringToday().await()
+                MovieApi.retrofitService.getSeriesAiringTodayAsync().await()
             database.cinephileDao().insertAiringToday(*airingToday.asDatabaseModel())
 
         }

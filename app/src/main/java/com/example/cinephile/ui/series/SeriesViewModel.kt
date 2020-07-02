@@ -55,7 +55,7 @@ class SeriesViewModel(application: Application, context: Context?): AndroidViewM
 
     private fun getPopularSeries() {
         coroutineScope.launch(Dispatchers.IO){
-            val getPopularSeriesDeferred = MovieApi.retrofitService.getPopularSeries()
+            val getPopularSeriesDeferred = MovieApi.retrofitService.getPopularSeriesAsync()
             try {
                 val popularSeriesResult = getPopularSeriesDeferred.await()
                 _popularSeriesList.value = popularSeriesResult.results as List<SeriesResultsItem>?
@@ -67,7 +67,7 @@ class SeriesViewModel(application: Application, context: Context?): AndroidViewM
 
     private fun getTopRatedSeries() {
         coroutineScope.launch(Dispatchers.IO) {
-            val getDeferredTopRated = MovieApi.retrofitService.getTopRatedSeries()
+            val getDeferredTopRated = MovieApi.retrofitService.getTopRatedSeriesAsync()
             try{
                 val seriesListResult = getDeferredTopRated.await()
                 _topRatedList.value = seriesListResult.results as List<SeriesResultsItem>?
