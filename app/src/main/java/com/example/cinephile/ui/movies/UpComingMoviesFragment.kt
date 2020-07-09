@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.cinephile.databinding.FragmentUpComingMoviesBinding
+import com.example.cinephile.utils.MarginItemDecoration
 
 /**
  * A simple [Fragment] subclass.
@@ -31,6 +32,7 @@ class UpComingMoviesFragment : Fragment() {
 
         binding.movieRecyclerView.apply {
             layoutManager = GridLayoutManager(activity,2)
+            addItemDecoration(MarginItemDecoration(16))
             adapter = MoviePagingAdapter(MoviePagingAdapter.OnClickListener{
                 movieViewModel.displayPropertyDetails(it)
             })

@@ -1,6 +1,9 @@
 package com.example.cinephile.utils
 
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +24,16 @@ import com.example.cinephile.ui.seriesdetail.SeriesSeasonAdapter
 fun bindRecyclerView(recyclerView: RecyclerView, data: PagedList<MovieResultsItem>?){
     val adapter = recyclerView.adapter as MoviePagingAdapter
     adapter.submitList(data)
+}
+
+@BindingAdapter("ratings")
+fun bindRatings(textView: TextView, ratings:String){
+    if (ratings.toDouble()<= 4.0){
+        textView.visibility = GONE
+    }else{
+        textView.visibility = VISIBLE
+        textView.text = ratings
+    }
 }
 
 @BindingAdapter("loadImage")

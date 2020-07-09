@@ -31,7 +31,7 @@ class CinephileRepository(private val database: MovieItemResultDatabase){
         database.cinephileDao().getPopularMovies()
 
     private val pagedListConfig = PagedList.Config.Builder()
-        .setEnablePlaceholders(true)
+        .setEnablePlaceholders(false)
         .setInitialLoadSizeHint(INITIAL_LOAD_SIZE_HINT)
         .setPageSize(PAGE_SIZE)
         .build()
