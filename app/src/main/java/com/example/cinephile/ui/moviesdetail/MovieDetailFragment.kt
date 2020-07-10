@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cinephile.databinding.MovieDetailFragmentBinding
 import com.example.cinephile.ui.movies.MovieDetailViewModelFactory
+import com.example.cinephile.utils.CastMarginItemDecoration
 import kotlinx.android.synthetic.main.movie_detail_fragment.*
 import timber.log.Timber
 
@@ -43,6 +44,7 @@ class MovieDetailFragment : Fragment() {
 
         binding.movieCast.movieCastRecyclerView.apply {
             adapter = CastAdapter()
+            addItemDecoration(CastMarginItemDecoration(16))
             layoutManager = LinearLayoutManager(activity, RecyclerView.HORIZONTAL,false)
         }
 

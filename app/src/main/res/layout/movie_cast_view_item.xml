@@ -9,48 +9,45 @@
 
     </data>
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvEmployee"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="1dp"
+        >
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:adjustViewBounds = "true">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cvEmployee"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            app:cardElevation="4dp"
-            app:cardCornerRadius="1dp"
-            android:layout_marginStart="150dp">
-
-
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+        android:adjustViewBounds = "true"
+        android:orientation="vertical">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/movie_cast_image"
         loadImage = "@{movieCast.profilePath}"
+        android:scaleType="fitXY"
         android:layout_width="match_parent"
+        android:adjustViewBounds="true"
         android:layout_height="150dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/movie_cast_actor_movie_name"
-        android:text ="@{movieCast.character}"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/movie_cast_image"
-        app:layout_constraintStart_toStartOf="@+id/movie_cast_image"
-        app:layout_constraintTop_toBottomOf="@+id/movie_cast_image" />
+        <TextView
+            android:id="@+id/movie_cast_actor_movie_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@{movieCast.character}"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/movie_cast_image"
+            app:layout_constraintStart_toStartOf="@+id/movie_cast_image"
+            app:layout_constraintTop_toBottomOf="@+id/movie_cast_image" />
 
     <TextView
         android:id="@+id/movie_cast_actor_name"
@@ -63,9 +60,7 @@
         app:layout_constraintEnd_toEndOf="@+id/movie_cast_actor_movie_name"
         app:layout_constraintStart_toStartOf="@+id/movie_cast_actor_movie_name"
         app:layout_constraintTop_toBottomOf="@+id/movie_cast_actor_movie_name" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
     </LinearLayout>
+ </androidx.cardview.widget.CardView>
+
 </layout>

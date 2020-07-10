@@ -29,7 +29,6 @@ class CastMarginItemDecoration(private val spaceHeight: Int): RecyclerView.ItemD
         state: RecyclerView.State
     ) {
         with(outRect) {
-            top = spaceHeight
             left = spaceHeight
             right = spaceHeight
             bottom = spaceHeight
