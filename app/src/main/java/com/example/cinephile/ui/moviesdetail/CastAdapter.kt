@@ -20,7 +20,8 @@ class CastAdapter : ListAdapter<CastItem,CastAdapter.CastViewHolder>(DiffCallbac
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CastViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = MovieCastViewItemBinding.inflate(layoutInflater)
+        val binding = MovieCastViewItemBinding
+            .inflate(layoutInflater,parent,false)
         return CastViewHolder(binding)
     }
 

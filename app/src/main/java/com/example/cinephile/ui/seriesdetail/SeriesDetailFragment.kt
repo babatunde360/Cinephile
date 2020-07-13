@@ -46,7 +46,7 @@ class SeriesDetailFragment : Fragment() {
         TabLayoutMediator(seriesDetailTabs,seriesDetailViewPager){tab, position ->
             when(position){
                 0->{
-                    tab.text = "Cast"
+                    tab.text = "Info"
                 }else->{
                 tab.text = "Seasons"
             }

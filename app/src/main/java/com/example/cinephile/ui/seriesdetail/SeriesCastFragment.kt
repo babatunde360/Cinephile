@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cinephile.databinding.FragmentSeriesCastPagerBinding
 import com.example.cinephile.ui.moviesdetail.CastAdapter
+import com.example.cinephile.utils.CastMarginItemDecoration
 
 
 class SeriesCastFragment : Fragment() {
@@ -32,6 +33,7 @@ class SeriesCastFragment : Fragment() {
 
         binding.castRecyclerView.apply {
             layoutManager =  LinearLayoutManager(activity,RecyclerView.HORIZONTAL,false)
+            addItemDecoration(CastMarginItemDecoration(16))
            adapter = CastAdapter()
         }
 

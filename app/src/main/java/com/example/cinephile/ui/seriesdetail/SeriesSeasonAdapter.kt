@@ -21,7 +21,7 @@ class SeriesSeasonAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SeriesSeasonViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = SeriesSeasonViewItemBinding.inflate(layoutInflater)
+        val binding = SeriesSeasonViewItemBinding.inflate(layoutInflater,parent,false)
         return SeriesSeasonViewHolder(binding)
     }
 
