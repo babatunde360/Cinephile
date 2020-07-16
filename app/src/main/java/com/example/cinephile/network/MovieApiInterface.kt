@@ -1,6 +1,5 @@
 package com.example.cinephile.network
 
-import com.example.cinephile.ui.series.PopularSeries
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -47,7 +46,7 @@ interface MovieApiInterface {
 
     @GET("tv/popular?api_key=${api_key}&language=en-US")
     fun getPopularSeriesAsync():
-            Deferred<PopularSeries>
+            Deferred<NetworkPopularSeries>
 
 
 }

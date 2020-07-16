@@ -35,5 +35,11 @@ interface CinephileDao {
     @Query("delete from databaseairingtodayseriesitem")
     fun deleteairingtoday()
 
+    //PopularSeries
+    @Query("select * from databasepopularseriesitem")
+    fun getPopularSeries():LiveData<List<DatabasePopularSeriesItem>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertPopularSeries(vararg popularSeries: DatabasePopularSeriesItem)
 
 }

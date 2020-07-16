@@ -8,7 +8,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.cinephile.database.MovieItemResultDatabase
-import com.example.cinephile.network.MovieApi
 import com.example.cinephile.domain.SeriesResultsItem
 import com.example.cinephile.repository.CinephileRepository
 import com.example.cinephile.utils.isOnline
@@ -16,7 +15,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class SeriesViewModel(application: Application, context: Context?): AndroidViewModel(application){
     private val viewModelJob = Job()
@@ -30,10 +28,7 @@ class SeriesViewModel(application: Application, context: Context?): AndroidViewM
     val topRatedList: LiveData<List<SeriesResultsItem>>
         get() = _topRatedList
 
-    private val _popularSeriesList = MutableLiveData<List<SeriesResultsItem>>()
-    val popularSeriesList: LiveData<List<SeriesResultsItem>>
-    get() = _popularSeriesList
-
+    val popularSeriesList = repository.popularSeries
     val airingTodayList = repository.airingToday
 
     private val _navigateToSelectedProperty = MutableLiveData<SeriesResultsItem>()
@@ -49,36 +44,10 @@ class SeriesViewModel(application: Application, context: Context?): AndroidViewM
             if(isConnected) {
                 repository.deleteAiringToday()
                 repository.refreshAiringToday()
+                repository.refreshPopularSeries()
             }
         }
     }
-
-    private fun getPopularSeries() {
-        coroutineScope.launch(Dispatchers.IO){
-            val getPopularSeriesDeferred = MovieApi.retrofitService.getPopularSeriesAsync()
-            try {
-                val popularSeriesResult = getPopularSeriesDeferred.await()
-                _popularSeriesList.value = popularSeriesResult.results as List<SeriesResultsItem>?
-            }catch (e: Exception){
-                Timber.d(e)
-            }
-        }
-    }
-
-    private fun getTopRatedSeries() {
-        coroutineScope.launch(Dispatchers.IO) {
-            val getDeferredTopRated = MovieApi.retrofitService.getTopRatedSeriesAsync()
-            try{
-                val seriesListResult = getDeferredTopRated.await()
-                _topRatedList.value = seriesListResult.results as List<SeriesResultsItem>?
-
-
-            }catch (e:Exception){
-                Timber.d(e)
-            }
-        }
-    }
-
 
 
     fun displayPropertyDetails(itemSeries: SeriesResultsItem){

@@ -21,7 +21,8 @@ class SeriesCastFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentSeriesCastPagerBinding.inflate(inflater)
+        val binding = FragmentSeriesCastPagerBinding
+            .inflate(inflater,container,false)
         binding.lifecycleOwner = this
 
         val viewModel: SeriesDetailViewModel? =  parentFragment?.let {

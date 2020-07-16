@@ -74,4 +74,18 @@ class CinephileRepository(private val database: MovieItemResultDatabase){
             database.cinephileDao().deleteairingtoday()
         }
     }
+
+    //Popular Series
+    suspend fun refreshPopularSeries(){
+        withContext(Dispatchers.IO){
+            val popularSeries =
+                MovieApi.retrofitService.getPopularSeriesAsync().await()
+            database.cinephileDao().insertPopularSeries(*popularSeries.asDatabaseModel())
+        }
+    }
+
+    val popularSeries:LiveData<List<SeriesResultsItem>> =
+        Transformations.map(database.cinephileDao().getPopularSeries()){
+            it.asDomainModel()
+        }
 }

@@ -1,15 +1,17 @@
 package com.example.cinephile.database
 
 import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
 
 @Database(entities = [
     DatabaseMovieResultsItem::class
     ,DatabaseAiringTodaySeriesItem::class
+    ,DatabasePopularSeriesItem::class
     ,DatabaseUpComingMovieResultItem::class]
     ,version = 1,exportSchema = false)
-public abstract class MovieItemResultDatabase : RoomDatabase(){
+ abstract class MovieItemResultDatabase : RoomDatabase(){
     abstract fun cinephileDao(): CinephileDao
 
     companion object{
