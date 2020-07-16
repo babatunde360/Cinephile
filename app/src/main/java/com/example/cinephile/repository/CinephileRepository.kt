@@ -85,11 +85,11 @@ class CinephileRepository(private val database: MovieItemResultDatabase){
             database.cinephileDao().insertPopularSeries(*popularSeries.asDatabaseModel())
         }
     }
+    val popularSeriesFactory =
+        database.cinephileDao().getPopularSeries()
 
-    val popularSeries:LiveData<List<SeriesResultsItem>> =
-        Transformations.map(database.cinephileDao().getPopularSeries()){
-            it.asDomainModel()
-        }
+    val popularSeries:LiveData<PagedList<SeriesResultsItem>> =
+        LivePagedListBuilder(popularSeriesFactory,pagedListConfig).build()
 
     //TopRated Series
     suspend fun refreshTopRatedSeries(){

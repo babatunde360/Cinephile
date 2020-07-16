@@ -38,7 +38,7 @@ interface CinephileDao {
 
     //PopularSeries
     @Query("select * from databasepopularseriesitem")
-    fun getPopularSeries():LiveData<List<DatabasePopularSeriesItem>>
+    fun getPopularSeries(): DataSource.Factory<Int,SeriesResultsItem>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPopularSeries(vararg popularSeries: DatabasePopularSeriesItem)

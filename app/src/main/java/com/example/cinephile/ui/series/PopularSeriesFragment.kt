@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.cinephile.databinding.FragmentPopularSeriesBinding
+import com.example.cinephile.utils.MarginItemDecoration
 
 /**
  * A simple [Fragment] subclass.
@@ -32,18 +33,22 @@ class PopularSeriesFragment : Fragment() {
             get(SeriesViewModel::class.java)
 
         binding.viewModel = viewModel
+        binding.popularSeriesRecyclerView.apply{
+            adapter = SeriesPagingAdapter(SeriesPagingAdapter.OnClickListener{
+                viewModel.displayPropertyDetails(it)
+            })
+            addItemDecoration(MarginItemDecoration(16))
+            layoutManager = GridLayoutManager(activity,2)
 
-        binding.popularSeriesRecyclerView.adapter = SeriesAdapter(SeriesAdapter.OnClickListener{
-            viewModel.displayPropertyDetails(it)
-        })
+        }
+
+
         viewModel.navigateToSelectedProperty.observe(viewLifecycleOwner, Observer {
             if (it!=null){
                 this.findNavController().navigate(SeriesFragmentDirections.actionNavSeriesToSeriesDetailFragment(it))
                 viewModel.displayPropertyDetailsComplete()
             }
         })
-
-        binding.popularSeriesRecyclerView.layoutManager = GridLayoutManager(activity,2)
 
         return binding.root
     }
