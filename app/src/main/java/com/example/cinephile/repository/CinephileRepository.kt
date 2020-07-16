@@ -88,4 +88,19 @@ class CinephileRepository(private val database: MovieItemResultDatabase){
         Transformations.map(database.cinephileDao().getPopularSeries()){
             it.asDomainModel()
         }
+
+    //TopRated Series
+    suspend fun refreshTopRatedSeries(){
+        withContext(Dispatchers.IO){
+            val topRatedSeries =
+                MovieApi.retrofitService.getTopRatedSeriesAsync().await()
+            database.cinephileDao().insertTopRatedSeries(*topRatedSeries.asDatabaseModel())
+        }
+    }
+
+    val topRatedSeries: LiveData<List<SeriesResultsItem>> =
+        Transformations.map(database.cinephileDao().getTopRatedSeries()){
+            it.asDomainModel()
+        }
+
 }

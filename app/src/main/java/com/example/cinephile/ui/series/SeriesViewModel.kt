@@ -23,11 +23,7 @@ class SeriesViewModel(application: Application, context: Context?): AndroidViewM
     private val database = MovieItemResultDatabase.getDatabase(application)
     private val repository = CinephileRepository(database)
 
-
-    private val _topRatedList = MutableLiveData<List<SeriesResultsItem>>()
-    val topRatedList: LiveData<List<SeriesResultsItem>>
-        get() = _topRatedList
-
+    val topRatedList = repository.topRatedSeries
     val popularSeriesList = repository.popularSeries
     val airingTodayList = repository.airingToday
 
@@ -45,6 +41,7 @@ class SeriesViewModel(application: Application, context: Context?): AndroidViewM
                 repository.deleteAiringToday()
                 repository.refreshAiringToday()
                 repository.refreshPopularSeries()
+                repository.refreshTopRatedSeries()
             }
         }
     }

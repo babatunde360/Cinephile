@@ -42,7 +42,7 @@ interface MovieApiInterface {
 
     @GET("tv/top_rated?api_key=${api_key}&language=en-US")
     fun getTopRatedSeriesAsync():
-            Deferred<TopRated>
+            Deferred<NetworkTopRated>
 
     @GET("tv/popular?api_key=${api_key}&language=en-US")
     fun getPopularSeriesAsync():

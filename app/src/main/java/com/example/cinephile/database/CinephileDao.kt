@@ -42,4 +42,10 @@ interface CinephileDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPopularSeries(vararg popularSeries: DatabasePopularSeriesItem)
 
+    @Query("select * from databasetopratedseriesitem")
+    fun getTopRatedSeries():LiveData<List<DatabaseTopRatedSeriesItem>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertTopRatedSeries(vararg topRatedSeries: DatabaseTopRatedSeriesItem)
+
 }

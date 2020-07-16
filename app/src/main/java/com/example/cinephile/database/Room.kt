@@ -9,6 +9,7 @@ import androidx.room.RoomDatabase
     DatabaseMovieResultsItem::class
     ,DatabaseAiringTodaySeriesItem::class
     ,DatabasePopularSeriesItem::class
+    ,DatabaseTopRatedSeriesItem::class
     ,DatabaseUpComingMovieResultItem::class]
     ,version = 1,exportSchema = false)
  abstract class MovieItemResultDatabase : RoomDatabase(){
