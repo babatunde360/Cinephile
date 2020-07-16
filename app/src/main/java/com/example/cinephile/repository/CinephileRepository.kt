@@ -52,7 +52,8 @@ class CinephileRepository(private val database: MovieItemResultDatabase){
     private val upComingMoviesFactory =
         database.cinephileDao().getUpComingMovies()
 
-    val upComingMovies  = LivePagedListBuilder(upComingMoviesFactory,pagedListConfig).build()
+    val upComingMovies  =
+        LivePagedListBuilder(upComingMoviesFactory,pagedListConfig).build()
 
     //Series AiringToday
     suspend fun refreshAiringToday(){
@@ -64,10 +65,11 @@ class CinephileRepository(private val database: MovieItemResultDatabase){
         }
     }
 
-    val airingToday:LiveData<List<SeriesResultsItem>> =
-        Transformations.map(database.cinephileDao().getAiringTodaySeries()){
-            it.asDomainModel()
-        }
+    private val airingTodayFactory =
+        database.cinephileDao().getAiringTodaySeries()
+
+    val airingToday:LiveData<PagedList<SeriesResultsItem>> =
+        LivePagedListBuilder(airingTodayFactory,pagedListConfig).build()
 
     suspend fun deleteAiringToday(){
         withContext(Dispatchers.IO){

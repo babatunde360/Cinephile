@@ -7,6 +7,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.cinephile.domain.MovieResultsItem
+import com.example.cinephile.domain.SeriesResultsItem
 
 @Dao
 interface CinephileDao {
@@ -27,7 +28,7 @@ interface CinephileDao {
 
     //Series AiringToday
     @Query("select * from databaseairingtodayseriesitem")
-    fun getAiringTodaySeries(): LiveData<List<DatabaseAiringTodaySeriesItem>>
+    fun getAiringTodaySeries(): DataSource.Factory<Int,SeriesResultsItem>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAiringToday(vararg airingToday: DatabaseAiringTodaySeriesItem)

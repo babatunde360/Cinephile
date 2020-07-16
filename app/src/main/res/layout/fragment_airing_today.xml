@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/airingTodayRecyclerView"
-        seriesListData="@{SeriesViewModel.airingTodayList}"/>
+        seriesPagedListData="@{SeriesViewModel.airingTodayList}"/>
 
     <!--TODO fix this to load more data when you click load next-->
     <TextView

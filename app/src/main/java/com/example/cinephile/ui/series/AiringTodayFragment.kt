@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.cinephile.databinding.FragmentAiringTodayBinding
+import com.example.cinephile.utils.MarginItemDecoration
 
 class AiringTodayFragment : Fragment() {
     override fun onCreateView(
@@ -28,16 +29,20 @@ class AiringTodayFragment : Fragment() {
 
         binding.seriesViewModel = seriesViewModel
 
-        binding.airingTodayRecyclerView.adapter = SeriesAdapter(SeriesAdapter.OnClickListener{
-            seriesViewModel.displayPropertyDetails(it)
-        })
+        binding.airingTodayRecyclerView.apply {
+            adapter = SeriesPagingAdapter(SeriesPagingAdapter.OnClickListener{
+                seriesViewModel.displayPropertyDetails(it)
+            })
+            addItemDecoration(MarginItemDecoration(16))
+            layoutManager = GridLayoutManager(activity,2)
+
+        }
         seriesViewModel.navigateToSelectedProperty.observe(viewLifecycleOwner, Observer {
             if(it != null){
                 this.findNavController().navigate(SeriesFragmentDirections.actionNavSeriesToSeriesDetailFragment(it))
                 seriesViewModel.displayPropertyDetailsComplete()
             }
         })
-        binding.airingTodayRecyclerView.layoutManager = GridLayoutManager(activity,2)
 
 
 
