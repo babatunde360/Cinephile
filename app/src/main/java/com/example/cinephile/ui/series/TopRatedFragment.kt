@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.cinephile.databinding.FragmentTopRatedBinding
+import com.example.cinephile.utils.MarginItemDecoration
 
 class TopRatedFragment : Fragment() {
     override fun onCreateView(
@@ -17,7 +18,8 @@ class TopRatedFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-       val binding = FragmentTopRatedBinding.inflate(inflater)
+       val binding =
+           FragmentTopRatedBinding.inflate(inflater,container,false)
 
         val application = requireNotNull(activity).application
         val seriesViewModel =
@@ -25,11 +27,16 @@ class TopRatedFragment : Fragment() {
                 .get(SeriesViewModel::class.java)
         binding.lifecycleOwner = this
 
+        binding.topRatedRecyclerView.apply {
+            layoutManager = GridLayoutManager(activity,2)
+            addItemDecoration(MarginItemDecoration(16))
+            adapter = SeriesPagingAdapter(SeriesPagingAdapter.OnClickListener{
+                seriesViewModel.displayPropertyDetails(it)
+            })
+        }
 
-        binding.topRatedRecyclerView.layoutManager = GridLayoutManager(activity,2)
-        binding.topRatedRecyclerView.adapter = SeriesAdapter(SeriesAdapter.OnClickListener{
-            seriesViewModel.displayPropertyDetails(it)
-        })
+
+
         seriesViewModel.navigateToSelectedProperty.observe(viewLifecycleOwner, Observer {
             if(it != null){
                 this.findNavController().navigate(SeriesFragmentDirections.actionNavSeriesToSeriesDetailFragment(it))

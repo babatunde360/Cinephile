@@ -22,7 +22,8 @@ class PopularSeriesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentPopularSeriesBinding.inflate(inflater)
+        val binding =
+            FragmentPopularSeriesBinding.inflate(inflater,container,false)
         binding.lifecycleOwner = this
 
 

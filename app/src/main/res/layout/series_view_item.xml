@@ -9,8 +9,8 @@
 
     </data>
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         app:cardElevation="4dp"
         app:cardCornerRadius="4dp">
         <androidx.constraintlayout.widget.ConstraintLayout

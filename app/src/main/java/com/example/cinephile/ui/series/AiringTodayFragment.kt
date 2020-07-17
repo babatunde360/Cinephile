@@ -18,7 +18,8 @@ class AiringTodayFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentAiringTodayBinding.inflate(inflater)
+        val binding =
+            FragmentAiringTodayBinding.inflate(inflater,container,false)
         binding.lifecycleOwner = this
 
         val application = requireNotNull(activity).application

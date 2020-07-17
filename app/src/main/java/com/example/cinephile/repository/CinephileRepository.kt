@@ -1,11 +1,9 @@
 package com.example.cinephile.repository
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.example.cinephile.database.MovieItemResultDatabase
-import com.example.cinephile.database.asDomainModel
 import com.example.cinephile.domain.SeriesResultsItem
 import com.example.cinephile.network.MovieApi
 import com.example.cinephile.network.asDatabaseModel
@@ -85,7 +83,7 @@ class CinephileRepository(private val database: MovieItemResultDatabase){
             database.cinephileDao().insertPopularSeries(*popularSeries.asDatabaseModel())
         }
     }
-    val popularSeriesFactory =
+    private val popularSeriesFactory =
         database.cinephileDao().getPopularSeries()
 
     val popularSeries:LiveData<PagedList<SeriesResultsItem>> =
@@ -100,9 +98,9 @@ class CinephileRepository(private val database: MovieItemResultDatabase){
         }
     }
 
-    val topRatedSeries: LiveData<List<SeriesResultsItem>> =
-        Transformations.map(database.cinephileDao().getTopRatedSeries()){
-            it.asDomainModel()
-        }
+    private val topRatedSeriesFactory = database.cinephileDao().getTopRatedSeries()
+
+    val topRatedSeries =
+        LivePagedListBuilder(topRatedSeriesFactory,pagedListConfig).build()
 
 }

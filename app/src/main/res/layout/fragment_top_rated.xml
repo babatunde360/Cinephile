@@ -20,7 +20,7 @@
         app:spanCount="2"
         android:layout_height="wrap_content"
         tools:listitem="@layout/series_view_item"
-        seriesListData="@{viewModel.topRatedList}"/>
+        seriesPagedListData="@{viewModel.topRatedList}"/>
 
 </LinearLayout>
 </layout>

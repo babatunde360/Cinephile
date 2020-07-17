@@ -17,7 +17,6 @@ import com.example.cinephile.network.CastItem
 import com.example.cinephile.network.SeriesSeasons
 import com.example.cinephile.ui.movies.MoviePagingAdapter
 import com.example.cinephile.ui.moviesdetail.CastAdapter
-import com.example.cinephile.ui.series.SeriesAdapter
 import com.example.cinephile.ui.series.SeriesPagingAdapter
 import com.example.cinephile.ui.seriesdetail.SeriesSeasonAdapter
 
@@ -60,11 +59,6 @@ fun bindCastRecyclerView(recyclerView: RecyclerView, data: List<CastItem>?){
     adapter.submitList(data)
 }
 
-@BindingAdapter("seriesListData")
-fun bindSeriesRecyclerView(recyclerView: RecyclerView, data: List<SeriesResultsItem>?){
-    val adapter = recyclerView.adapter as SeriesAdapter
-    adapter.submitList(data)
-}
 @BindingAdapter("seriesPagedListData")
 fun bindSeriesPagedRecyclerView(recyclerView: RecyclerView, data: PagedList<SeriesResultsItem>?){
     val adapter = recyclerView.adapter as SeriesPagingAdapter

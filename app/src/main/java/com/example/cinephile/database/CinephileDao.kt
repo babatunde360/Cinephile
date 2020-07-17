@@ -1,6 +1,5 @@
 package com.example.cinephile.database
 
-import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Insert
@@ -44,7 +43,7 @@ interface CinephileDao {
     fun insertPopularSeries(vararg popularSeries: DatabasePopularSeriesItem)
 
     @Query("select * from databasetopratedseriesitem")
-    fun getTopRatedSeries():LiveData<List<DatabaseTopRatedSeriesItem>>
+    fun getTopRatedSeries():DataSource.Factory<Int,SeriesResultsItem>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertTopRatedSeries(vararg topRatedSeries: DatabaseTopRatedSeriesItem)

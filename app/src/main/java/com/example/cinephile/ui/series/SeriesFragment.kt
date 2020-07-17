@@ -18,7 +18,7 @@ class SeriesFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-         binding = FragmentSeriesBinding.inflate(inflater)
+         binding = FragmentSeriesBinding.inflate(inflater,container,false)
         binding.lifecycleOwner = this
 
         val application = requireNotNull(activity).application
