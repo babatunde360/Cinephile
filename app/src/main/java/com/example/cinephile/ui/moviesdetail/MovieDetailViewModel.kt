@@ -67,7 +67,4 @@ class MovieDetailViewModel(movieResultsItem: MovieResultsItem, app: Application)
         }
     }
 
-    override fun onCleared() {
-        super.onCleared()
-    }
 }

@@ -1,6 +1,5 @@
 package com.example.cinephile.database
 
-import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.cinephile.domain.SeriesResultsItem

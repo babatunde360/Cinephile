@@ -23,4 +23,6 @@
     <string name="season_image">season image</string>
     <string name="storyline">Storyline</string>
     <string name="cast">Cast</string>
+    <string name="no_season_data">No Season data</string>
+    <string name="no_cast_detail">No Cast detail</string>
 </resources>

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cinephile.databinding.SeriesViewItemBinding
 import com.example.cinephile.domain.SeriesResultsItem
 
-class SeriesPagingAdapter(val onClickListener: OnClickListener)
+class SeriesPagingAdapter(private val onClickListener: OnClickListener)
     : PagedListAdapter<SeriesResultsItem, SeriesPagingAdapter.SeriesViewHolder>(DiffCallback) {
 
 

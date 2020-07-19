@@ -51,13 +51,49 @@ fun bindImage(imageView: ImageView, imageUrl: String?) {
             )
             .into(imageView)
     }
+}@BindingAdapter("loadMovieDetailImage")
+fun bindDetailImage(imageView: ImageView, movieResultItem: MovieResultsItem?) {
+    var imageUrl: String? = if (movieResultItem?.backdropPath!= null){
+        movieResultItem.backdropPath
+    }else{
+        movieResultItem?.posterPath
+    }
+
+    imageUrl?.let {
+        val url = "https://image.tmdb.org/t/p/original$imageUrl"
+        Glide.with(imageView.context)
+            .load(url)
+            .apply(
+                RequestOptions()
+                    .timeout(30000)
+                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                    .placeholder(R.drawable.loading_animation)
+                    .error(R.drawable.ic_broken_image)
+            )
+            .into(imageView)
+    }
 }
 
 @BindingAdapter("castListData")
 fun bindCastRecyclerView(recyclerView: RecyclerView, data: List<CastItem>?){
-    val adapter = recyclerView.adapter as CastAdapter
-    adapter.submitList(data)
+    if(data != null && data.isNotEmpty()){
+        recyclerView.visibility = VISIBLE
+        val adapter = recyclerView.adapter as CastAdapter
+        adapter.submitList(data)
+    }else{
+        recyclerView.visibility = GONE
+    }
 }
+@BindingAdapter("castDataChecker")
+fun bindCastDataChecker(tv:TextView, data: List<CastItem>?) {
+    if (data == null || data.isEmpty()) {
+        tv.visibility = VISIBLE
+    }else{
+        tv.visibility = GONE
+    }
+}
+
+
 
 @BindingAdapter("seriesPagedListData")
 fun bindSeriesPagedRecyclerView(recyclerView: RecyclerView, data: PagedList<SeriesResultsItem>?){
@@ -66,7 +102,20 @@ fun bindSeriesPagedRecyclerView(recyclerView: RecyclerView, data: PagedList<Seri
 }
 
 @BindingAdapter("seriesSeason")
-fun bindSeasonRecyclerView(rv:RecyclerView, data: List<SeriesSeasons>?){
-    val adapter = rv.adapter as SeriesSeasonAdapter
-    adapter.submitList(data)
+fun bindSeasonRecyclerView(rv:RecyclerView, data: List<SeriesSeasons>?) {
+    if (data != null) {
+        rv.visibility = VISIBLE
+        val adapter = rv.adapter as SeriesSeasonAdapter
+        adapter.submitList(data)
+    }else{
+        rv.visibility = GONE
+    }
+}
+@BindingAdapter("seriesSeasonDataChecker")
+fun bindSeasonDataChecker(tv:TextView, data: List<SeriesSeasons>?) {
+    if (data != null) {
+        tv.visibility = GONE
+    }else{
+        tv.visibility = VISIBLE
+    }
 }

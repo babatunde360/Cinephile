@@ -1,6 +1,5 @@
 package com.example.cinephile.network
 
-import com.example.cinephile.database.DatabaseMovieResultsItem
 import com.example.cinephile.database.DatabaseUpComingMovieResultItem
 import com.example.cinephile.domain.MovieResultsItem
 import com.squareup.moshi.Json

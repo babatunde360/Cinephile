@@ -120,7 +120,18 @@
                     android:textAllCaps="true"
                     android:textColor="#05070B"
                     android:textStyle="bold" />
-
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_cast_detail"
+                    android:layout_marginStart="8dp"
+                    castDataChecker="@{viewModel.movieCastList}"
+                    android:layout_marginTop="50dp"
+                    android:textColor="#05070B"
+                    android:layout_marginBottom="50dp"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    />
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/movieCastRecyclerView"
                     castListData="@{viewModel.movieCastList}"

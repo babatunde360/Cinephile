@@ -31,17 +31,12 @@ class MovieViewModel(application: Application, context: Context?) : AndroidViewM
     val navigateToSelectedProperty : LiveData<MovieResultsItem>
     get() = _navigateToSelectedProperty
 
-    private val _connected = MutableLiveData<Boolean>()
-    val connected: LiveData<Boolean>
-    get() = _connected
-
     @RequiresApi(Build.VERSION_CODES.M)
     val isConnected = isOnline(context)
 
     init {
         coroutineScope.launch {
             if (isConnected){
-                connected.value == true
             repository.refreshPopularMovies()
             repository.refreshUpcomingMovies()
             }

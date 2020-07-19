@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cinephile.databinding.MovieViewItemBinding
 import com.example.cinephile.domain.MovieResultsItem
 
-class MoviePagingAdapter(val onClickListener: OnClickListener) :
+class MoviePagingAdapter(private val onClickListener: OnClickListener) :
     PagedListAdapter<MovieResultsItem,MoviePagingAdapter.MovieViewHolder>(DIFF_CALLBACK){
     class MovieViewHolder(private var binding: MovieViewItemBinding):
         RecyclerView.ViewHolder(binding.root) {

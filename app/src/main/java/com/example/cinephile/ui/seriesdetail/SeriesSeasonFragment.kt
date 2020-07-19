@@ -13,10 +13,6 @@ import com.example.cinephile.utils.MarginItemDecoration
 
 class SeriesSeasonFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = SeriesSeasonFragment()
-    }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,10 +33,6 @@ class SeriesSeasonFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
         }
         return binding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
     }
 
 }

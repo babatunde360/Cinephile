@@ -25,22 +25,21 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                 R.id.nav_movies, R.id.nav_series)
+                R.id.nav_movies, R.id.nav_series
+            )
         )
-     navView.setupWithNavController(navController)
+        navView.setupWithNavController(navController)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (isOnline(this)) {
+                    networkStatus.visibility = View.GONE
+                } else {
+                    networkStatus.visibility = View.VISIBLE
+                }
 
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if(isOnline(this)){
-                networkStatus.visibility = View.GONE
-            }else{
-                networkStatus.visibility = View.VISIBLE
+            } else {
+                TODO("VERSION.SDK_INT < M")
             }
-        } else {
-            TODO("VERSION.SDK_INT < M")
-        }
-
     }
-
 
     override fun onSupportNavigateUp() = findNavController(R.id.nav_host_fragment).navigateUp()
 
