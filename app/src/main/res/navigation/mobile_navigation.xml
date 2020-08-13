@@ -8,7 +8,6 @@
     <fragment
         android:id="@+id/nav_movies"
         android:name="com.example.cinephile.ui.movies.MovieFragment"
-        android:label="movie_fragment"
         tools:layout="@layout/fragment_movie">
         <action
             android:id="@+id/action_showDetail"
@@ -17,8 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_series"
-        android:name="com.example.cinephile.ui.series.SeriesFragment"
-        android:label="SeriesFragment" >
+        android:name="com.example.cinephile.ui.series.SeriesFragment">
         <action
             android:id="@+id/action_nav_series_to_seriesDetailFragment"
             app:destination="@id/seriesDetailFragment" />
@@ -39,4 +37,10 @@
             android:name="selectedSeries"
             app:argType="com.example.cinephile.domain.SeriesResultsItem" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.cinephile.settings.SettingsFragment" />
+
+    <action android:id="@+id/action_open_settings_fragment"
+        app:destination="@id/settingsFragment"/>
 </navigation>

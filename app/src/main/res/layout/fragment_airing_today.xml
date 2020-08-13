@@ -24,15 +24,7 @@
         android:id="@+id/airingTodayRecyclerView"
         seriesPagedListData="@{SeriesViewModel.airingTodayList}"/>
 
-    <!--TODO fix this to load more data when you click load next-->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:id="@+id/loadMore"
-        android:text="@string/load_next"
-        android:layout_weight="0"
-        android:layout_gravity="center_horizontal"
-        />
+
 </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

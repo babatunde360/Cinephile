@@ -1,0 +1,15 @@
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <PreferenceCategory app:title="@string/display_settings">
+
+        <SwitchPreferenceCompat
+            app:key="night_mode"
+            app:title="@string/theme_title"
+            app:summaryOn="@string/night_mode_summary_on"
+            app:summaryOff="@string/night_mode_summary_off"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

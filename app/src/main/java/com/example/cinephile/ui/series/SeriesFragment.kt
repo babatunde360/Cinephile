@@ -1,13 +1,17 @@
 package com.example.cinephile.ui.series
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
+import com.example.cinephile.R
 import com.example.cinephile.databinding.FragmentSeriesBinding
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.android.synthetic.main.fragment_series.*
 
 class SeriesFragment : Fragment(){
 
@@ -36,6 +40,10 @@ class SeriesFragment : Fragment(){
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val appBarConfiguration = AppBarConfiguration.Builder(R.id.nav_series).build()
+        NavigationUI.setupWithNavController(series_toolbar,findNavController(),appBarConfiguration)
+        setHasOptionsMenu(true)
+        (activity as AppCompatActivity).setSupportActionBar(series_toolbar)
 
         val seriesTab = binding.seriesTab
         val seriesViewPager = binding.seriesViewPager
@@ -55,5 +63,19 @@ class SeriesFragment : Fragment(){
 
         }.attach()
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.action_settings ->{
+                findNavController().navigate(SeriesFragmentDirections.actionOpenSettingsFragment())
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_menu,menu)
     }
 }

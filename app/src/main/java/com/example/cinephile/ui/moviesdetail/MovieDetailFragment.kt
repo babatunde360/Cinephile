@@ -4,9 +4,8 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cinephile.R
 import com.example.cinephile.databinding.MovieDetailFragmentBinding
 import com.example.cinephile.ui.movies.MovieDetailViewModelFactory
 import com.example.cinephile.utils.CastMarginItemDecoration
@@ -53,6 +53,9 @@ class MovieDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
        NavigationUI.setupWithNavController(movie_detail_toolbar,findNavController())
+        setHasOptionsMenu(true)
+        (activity as AppCompatActivity).setSupportActionBar(movie_detail_toolbar)
+
         viewModel.selectedProperty.observe(viewLifecycleOwner, Observer {
             if(it!=null) {
                 if(it.video != null)
@@ -78,7 +81,19 @@ class MovieDetailFragment : Fragment() {
             }
 
         })
-
-
     }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.action_settings ->{
+                findNavController().navigate(MovieDetailFragmentDirections.actionOpenSettingsFragment())
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_menu,menu)
+    }
+
 }
